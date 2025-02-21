@@ -789,7 +789,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 1535582439}
   nameBox: {fileID: 329123450}
-  UI: {fileID: 200115949}
   Character1: {fileID: 0}
   Character1Logic: {fileID: 0}
   Character2: {fileID: 0}

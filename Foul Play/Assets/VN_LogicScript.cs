@@ -12,7 +12,8 @@ public class VN_LogicScript : MonoBehaviour
     public Text nameBox;
     int scriptIndex = 0;
     bool continueScript = true;
-    public GameObject UI;
+    
+    // Current way of giving control over the characters
     public GameObject Character1;
     public VN_CharacterScript Character1Logic;
     public GameObject Character2;
@@ -29,26 +30,28 @@ public class VN_LogicScript : MonoBehaviour
 
     string[] script = { "Appear", "Yoomtah" , "-5" , "Appear", "Kiane", "5" , "Say", "Yoomtah", "This is the first text box. After this we will both move", "Move", "Yoomtah", "5", "3", "Move", "Kiane", "-5", "5", "Say", "Kiane", "Wow how exciting!!!!! \n !!!!!!!!!!" };
 
-    // Start is called before the first frame update
     void Start()
     {
-        UI.SetActive(true);
+        // Grants control over the characters
         Character1Logic = GameObject.FindGameObjectWithTag("Character1").GetComponent<VN_CharacterScript>();
         Character2Logic = GameObject.FindGameObjectWithTag("Character2").GetComponent<VN_CharacterScript>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Checks if player wants to progress in the script.
+        // If they wish to then the loop will begin
         if (UnityEngine.Input.GetKeyDown(KeyCode.Space) | UnityEngine.Input.GetKeyDown(KeyCode.Return))
         {
             continueScript = true;
-
         }
 
-        if (continueScript) 
+        while (continueScript)
         {
+            // Assumes that something went wrong
+            // If a successful action is performed then it will be set to be false
             bool somethingWrong = true;
+
             if (script[scriptIndex] == "Say")
             {
                 //Shows text + speaker
@@ -60,11 +63,12 @@ public class VN_LogicScript : MonoBehaviour
                 continueScript = false;
                 somethingWrong = false;
             }
+
             else if (script[scriptIndex] == "Appear")
             {
-                //Spawns Character
-                //First one after code is the character
-                //Second one is the location on the x axis
+                // Teleports Character
+                // First one after code is the character
+                // Second one is the location on the x axis
                 // 7 in either direction starts to go out of bounds
                 // 25 is considered to be the default "gone" spot
 
@@ -78,14 +82,16 @@ public class VN_LogicScript : MonoBehaviour
                     Character2Logic.Appear(script[scriptIndex + 2]);
                     somethingWrong = false;
                 }
-                    scriptIndex += 3;
-                
-
+                scriptIndex += 3;
             }
+
             else if (script[scriptIndex] == "Move")
             {
-                //Moves Character
-                //Give speed to change how fast it moves
+                // Moves Character
+                // Give speed to change how fast it moves
+                // Want to find a way to just input the character's variable into a function
+                // So that this whole segemnt can just be a function
+
                 if (script[scriptIndex + 1] == "Yoomtah")
                 {
                     Character1Logic.Move(script[scriptIndex + 2], script[scriptIndex + 3]);
@@ -97,13 +103,27 @@ public class VN_LogicScript : MonoBehaviour
                     somethingWrong = false;
                 }
                 scriptIndex += 4;
-
             }
+
+            else if (script[scriptIndex] == "Change")
+            {
+                // Will be used to change sprites
+
+                scriptIndex += 1;
+            }
+
+            else if (script[scriptIndex] == "Choose")
+            {
+                // Will be used to make descisions
+
+                scriptIndex += 1;
+            }
+
             if (somethingWrong)
             {
                 //Something is wrong so will try to head to next command
                 nameBox.text = "Phox";
-                textBox.text =  "Something went wrong on line " + scriptIndex;
+                textBox.text = "Something went wrong on line " + scriptIndex;
                 continueScript = false;
                 scriptIndex += 1;
             }
