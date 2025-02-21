@@ -8,6 +8,8 @@ public class VN_CharacterScript : MonoBehaviour
     float targetSpeed = 0;
     float directionMod = 1;
 
+    public Sprite[] sprites;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,5 +51,10 @@ public class VN_CharacterScript : MonoBehaviour
             directionMod = -1;
         }
 
+    }
+
+    public void Change(string spriteNumber)
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprites[int.Parse(spriteNumber)];
     }
 }
