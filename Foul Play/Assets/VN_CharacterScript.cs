@@ -5,15 +5,13 @@ using UnityEngine;
 public class VN_CharacterScript : MonoBehaviour
 {
     float targetDesination = 25;
-    float targetSpeed = 5;
+    float targetSpeed = 0;
     float directionMod = 1;
-
-
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.localPosition = new Vector2(0, 0);
+
     }
 
     void Update()
@@ -25,15 +23,9 @@ public class VN_CharacterScript : MonoBehaviour
 
             if ((transform.position.x > targetDesination && directionMod == 1) | (transform.position.x < targetDesination && directionMod == -1))
             {
-
                 transform.position = new Vector3(targetDesination, 0, 0);
-
-
-
-
+                targetSpeed = 0;
             }
-
-
         }
     }
 
@@ -55,14 +47,7 @@ public class VN_CharacterScript : MonoBehaviour
         else
         {
             directionMod = -1;
-
         }
 
-        
     }
-
-
-
-    // Update is called once per frame
-
 }

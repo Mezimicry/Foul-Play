@@ -27,9 +27,7 @@ public class VN_LogicScript : MonoBehaviour
     //
     //
 
-
     string[] script = { "Appear", "Yoomtah" , "-5" , "Appear", "Kiane", "5" , "Say", "Yoomtah", "This is the first text box. After this we will both move", "Move", "Yoomtah", "5", "3", "Move", "Kiane", "-5", "5", "Say", "Kiane", "Wow how exciting!!!!! \n !!!!!!!!!!" };
-
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +45,6 @@ public class VN_LogicScript : MonoBehaviour
             continueScript = true;
 
         }
-
 
         if (continueScript) 
         {
@@ -110,19 +107,6 @@ public class VN_LogicScript : MonoBehaviour
                 continueScript = false;
                 scriptIndex += 1;
             }
-
-
-
         }
-
-
-
-
-
-
-
     }
-
-
-
 }
