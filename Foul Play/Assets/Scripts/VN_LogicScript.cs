@@ -30,17 +30,20 @@ public class VN_LogicScript : MonoBehaviour
     public float talkSpeed = 0.001f;
     float timer;
 
+    AudioSource audioSource;
+    public AudioClip talkSound;
+
     // Current way of giving control over the characters
     public GameObject Character1Object;
     VN_CharacterScript Character1;
     public GameObject Character2Object;
     VN_CharacterScript Character2;
 
-   // string[] script = { "Appear", "Yoomtah" , "-5" , "Appear", "Kiane", "5" , "Say", "Yoomtah", "This is the first text box. After this we will both move.", "Move", "Yoomtah", "5", "3", "Move", "Kiane", "-5", "5", "Say", "Kiane", "Wow how exciting!!!!! \n !!!!!!!!!!", "Say", "Yoomtah", "I will now change spites to be purple", "Change", "Yoomtah", "1", "Say", "Kiane", "Why don't I get a second sprite :'(", };
-
     void Start()
     {
         script = scriptFinder.GetComponent<VN_Scripts>().returnScript(desiredScript);
+
+        audioSource = GetComponent<AudioSource>();
 
         // Grants control over the characters
         Character1 = Character1Object.GetComponent<VN_CharacterScript>();
@@ -80,6 +83,11 @@ public class VN_LogicScript : MonoBehaviour
             else if (script[scriptIndex] == "Change")
             {
                 change();
+            }
+
+            else if (script[scriptIndex] == "Sound")
+            {
+                sound();
             }
 
             else if (script[scriptIndex] == "Choose")
@@ -183,6 +191,13 @@ public class VN_LogicScript : MonoBehaviour
         scriptIndex += 3;
     }
 
+    void sound()
+    {
+        // Will be used to make sounds play
+        scriptFinder.GetComponent<VN_SoundLibrary>().playSound(script[scriptIndex + 1]);
+        scriptIndex += 2;
+    }
+
     void choose()
     {
         // Will be used to make descisions
@@ -214,6 +229,9 @@ public class VN_LogicScript : MonoBehaviour
     void advanceDialogue()
     {
         textBox.text += (arrayTargetTextBox[arrayTargetTextBoxIndex] += " ");
+
+        audioSource.clip = talkSound;
+        audioSource.Play();
         arrayTargetTextBoxIndex += 1;
     }
 

@@ -10,7 +10,7 @@ public class VN_Scripts : MonoBehaviour
     // , "Appear", "Name" , "Location" 
     // , "Move", "Name" , "Location" , "Speed"
     // , "Change", "Name" , "SpriteNum" 
-    //
+    // , "Sound", "SoundName"
     //
 
 
@@ -19,7 +19,7 @@ public class VN_Scripts : MonoBehaviour
     {
         if (scriptName == "Test")
         {
-            string[] wantedScript =
+            string[] testScript =
             {
             "Appear", "Yoomtah", "-5",
             "Appear", "Kiane", "5",
@@ -27,11 +27,12 @@ public class VN_Scripts : MonoBehaviour
             "Move", "Yoomtah", "5", "3",
             "Move", "Kiane", "-5", "5",
             "Say", "Kiane", "Wow how exciting!!!!! \n !!!!!!!!!!",
+            "Sound", "KianeYay",
             "Say", "Yoomtah", "I will now change spites to be purple",
             "Change", "Yoomtah", "1",
             "Say", "Kiane", "Why don't I get a second sprite :'("
             };
-            return wantedScript;
+            return testScript;
             
         }
 
