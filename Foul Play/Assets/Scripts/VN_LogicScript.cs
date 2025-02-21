@@ -19,6 +19,8 @@ public class VN_LogicScript : MonoBehaviour
 
     public GameObject scriptFinder;
 
+
+    public string desiredScript;
     string[] script;
 
 
@@ -38,7 +40,7 @@ public class VN_LogicScript : MonoBehaviour
 
     void Start()
     {
-        script = scriptFinder.GetComponent<VN_Scripts>().returnScript("Test");
+        script = scriptFinder.GetComponent<VN_Scripts>().returnScript(desiredScript);
 
         // Grants control over the characters
         Character1 = Character1Object.GetComponent<VN_CharacterScript>();
