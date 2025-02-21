@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Character1
   - Character2
+  - Scripts
   layers:
   - Default
   - TransparentFX
