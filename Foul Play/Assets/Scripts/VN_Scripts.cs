@@ -4,25 +4,52 @@ using UnityEngine;
 
 public class VN_Scripts : MonoBehaviour
 {
-    //Templates
+    // Templates with explainations
+
+    // , "Appear", "Name" , "Location" 
+    // Moves the character instantly
+
+    // , "Branch", "NewScriptIndex"
+    // Changes location in the script
+
+    // , "Change", "Name" , "SpriteNum" 
+    // Changes the diresired character's sprite
+
+    // , "Choice", "ChoiceText1", "ChoiceIndex1", "ChoiceText2", "ChoiceIndex2"
+    // Gives the player 2 options that will send them to different parts of the script
+
+    // , "End"
+    // Ends the VN segement
+
+    // , "Move", "Name" , "Location" , "Speed"
+    // Moves the character over time
 
     // , "Say", "Name", "Text"
-    // , "Appear", "Name" , "Location" 
-    // , "Move", "Name" , "Location" , "Speed"
-    // , "Change", "Name" , "SpriteNum" 
-    // , "Sound", "SoundName"
-    // , "Branch", "NewScriptIndex"
-    // , "Choice", "ChoiceText1", "ChoiceIndex1", "ChoiceText2", "ChoiceIndex2"
-    // , "End"
-
-
-
-    /* Max size for say is assumed to be
+    // Show dialogue
+    /* Max size for say is assumed to be the same as
     Lorem ipsum odor amet, consectetuer adipiscing elit. Vulputate iaculis pellentesque efficitur et quam primis neque? Metus duis pellentesque congue sed blandit tempor aptent ac bibendum. Lobortis duis fames pretium mi fermentum. 
     If a line is longer than this then split it.
-
     */
 
+    // , "Sound", "SoundName"
+    // Play sound effects
+
+
+    // Plain templates
+
+    // , "Appear", "Name" , "Location" 
+    // , "Branch", "NewScriptIndex"
+    // , "Change", "Name" , "SpriteNum" 
+    // , "Choice", "ChoiceText1", "ChoiceIndex1", "ChoiceText2", "ChoiceIndex2"
+    // , "End"
+    // , "Move", "Name" , "Location" , "Speed"
+    // , "Say", "Name", "Text"
+    // , "Sound", "SoundName"
+
+
+
+    // This is called along with the name of a script
+    // It will then return the wanted script or an error
     public string[] returnScript(string scriptName)
     {
         if (scriptName == "Test")
@@ -35,7 +62,7 @@ public class VN_Scripts : MonoBehaviour
             , "Move", "Yoomtah", "5", "3" //9
             , "Move", "Kiane", "-5", "5"  //13
             , "Say", "Kiane", "Wow how exciting!!!!! \n!!!!!!!!!!" //17
-            , "Sound", "KianeYay" //20
+            , "Sound", "Kianeay" //20
             , "Say", "Yoomtah", "I will now change spites to be purple" //22
             , "Change", "Yoomtah", "1" //25
             , "Say", "Kiane", "Why don't I get a second sprite :'(" //28

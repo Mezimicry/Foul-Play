@@ -10,46 +10,70 @@ using static UnityEngine.ParticleSystem;
 
 public class VN_LogicScript : MonoBehaviour
 {
+    // Variables used for Say
     public Text textBox;
     public Text nameBox;
     string targetTextBox;
     string[] arrayTargetTextBox;
     int arrayTargetTextBoxIndex;
-
+    public float talkSpeed = 0.001f;
+    float timer;
     public GameObject PreviousDialogue;
     public Text[] pastDialogue;
     public Text[] pastName;
+    public AudioClip talkSound;
+    AudioSource audioSource;
 
+
+
+    // Variables used for Choice
+    // Hold the canvas the choiceUI is in.
     public GameObject choiceUI;
+
+    // Holds the text boxes used in the buttons
     public Text choice1Text;
     public Text choice2Text;
+    
+    // Holds the indexes that each of the buttons should send the player too
     int choice1Index;
     int choice2Index;
 
 
+
+    // Used for script
+    // The objects the scripts are stored in
     public GameObject scriptFinder;
 
-
+    // Is set to choose the wanted script
     public string desiredScript;
+
+    // Array the script is stored in
     string[] script;
 
-
+    // Stored current location in script
     int scriptIndex = 0;
-    bool continueScript = true;
-    bool allowContinue = true;
+
+    // Did the player do an input this frame
     bool playerInput = false;
 
-    public float talkSpeed = 0.001f;
-    float timer;
+    // Should the player's input continue the script
+    bool allowContinue = true;
 
-    AudioSource audioSource;
-    public AudioClip talkSound;
+    // Should the next action should be done
+    bool continueScript = true;
 
-    // Current way of giving control over the characters
+
+
+    // Characters
+    // Character 1
     public GameObject Character1Object;
     VN_CharacterScript Character1;
+
+    // Character 2
     public GameObject Character2Object;
     VN_CharacterScript Character2;
+
+
 
     void Start()
     {
@@ -70,7 +94,7 @@ public class VN_LogicScript : MonoBehaviour
         // Checks if player wants to progress in the script.
         // If they wish to then the loop will begin
         // Detects Space, Keyboard Enter, and Left Mouse
-
+        // Will not work if other menus are open
         playerInput = false;
         if (PreviousDialogue.activeSelf == false && (UnityEngine.Input.GetKeyDown(KeyCode.Space) | UnityEngine.Input.GetKeyDown(KeyCode.Return) | UnityEngine.Input.GetMouseButtonDown(0)))
         {

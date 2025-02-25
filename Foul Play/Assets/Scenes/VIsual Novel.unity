@@ -260,7 +260,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Character Name
+  m_Text: 
 --- !u!222 &81312846
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -441,7 +441,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Character Name
+  m_Text: 
 --- !u!222 &222342121
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -886,7 +886,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Character Name
+  m_Text: 
 --- !u!222 &584656324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1177,22 +1177,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 1535582439}
   nameBox: {fileID: 329123450}
+  talkSpeed: 0.1
   PreviousDialogue: {fileID: 1251410395}
   pastDialogue:
-  - {fileID: 1671624476}
-  - {fileID: 976575772}
   - {fileID: 1765865863}
+  - {fileID: 976575772}
+  - {fileID: 1671624476}
   pastName:
-  - {fileID: 584656323}
-  - {fileID: 222342120}
   - {fileID: 81312845}
+  - {fileID: 222342120}
+  - {fileID: 584656323}
+  talkSound: {fileID: 8300000, guid: 3602c276850b08c4fba67d781bb6c3f1, type: 3}
   choiceUI: {fileID: 2070583068}
   choice1Text: {fileID: 1207524203}
   choice2Text: {fileID: 1357126537}
   scriptFinder: {fileID: 1509666119}
   desiredScript: Test
-  talkSpeed: 0.1
-  talkSound: {fileID: 8300000, guid: 3602c276850b08c4fba67d781bb6c3f1, type: 3}
   Character1Object: {fileID: 1934050486}
   Character2Object: {fileID: 1752678680}
 --- !u!4 &969721427
@@ -1376,9 +1376,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Lorem ipsum odor amet, consectetuer adipiscing elit. Vulputate iaculis
-    pellentesque efficitur et quam primis neque? Metus duis pellentesque congue sed
-    blandit tempor aptent ac bibendum. Lobortis duis fames pretium mi fermentum. '
+  m_Text: 
 --- !u!222 &976575773
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2038,9 +2036,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Lorem ipsum odor amet, consectetuer adipiscing elit. Vulputate iaculis
-    pellentesque efficitur et quam primis neque? Metus duis pellentesque congue sed
-    blandit tempor aptent ac bibendum. Lobortis duis fames pretium mi fermentum. '
+  m_Text: 
 --- !u!222 &1671624477
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2352,9 +2348,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Lorem ipsum odor amet, consectetuer adipiscing elit. Vulputate iaculis
-    pellentesque efficitur et quam primis neque? Metus duis pellentesque congue sed
-    blandit tempor aptent ac bibendum. Lobortis duis fames pretium mi fermentum. '
+  m_Text: 
 --- !u!222 &1765865864
 CanvasRenderer:
   m_ObjectHideFlags: 0
