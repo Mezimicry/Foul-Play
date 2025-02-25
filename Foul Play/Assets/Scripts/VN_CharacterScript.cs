@@ -15,7 +15,7 @@ public class VN_CharacterScript : MonoBehaviour
     // Array that holds all of the character's sprites
     public Sprite[] sprites;
 
-    void Update()
+        void Update()
     {
         // This code only runs when the character need to move
         if (needToMove)

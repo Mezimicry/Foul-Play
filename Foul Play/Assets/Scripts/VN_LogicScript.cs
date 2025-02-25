@@ -65,14 +65,15 @@ public class VN_LogicScript : MonoBehaviour
 
 
     // Characters
-    // Character 1
-    public GameObject Character1Object;
-    VN_CharacterScript Character1;
+    // This array holds all of the characters
+    public GameObject[] CharacterObjects;
 
-    // Character 2
-    public GameObject Character2Object;
-    VN_CharacterScript Character2;
+    // This array will then have the character's scripts stored in it
+    // Make sure the number in it is larger than the number of characters
+    VN_CharacterScript[] Characters = new VN_CharacterScript[20];
 
+    // This holds the character that the current request may be asking for.
+    int wantedCharacter;
 
 
     void Start()
@@ -82,11 +83,15 @@ public class VN_LogicScript : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         // Grants control over the characters
-        Character1 = Character1Object.GetComponent<VN_CharacterScript>();
-        Character2 = Character2Object.GetComponent<VN_CharacterScript>();
+        for (int i = 0; i < CharacterObjects.Length; i++)
+        {
+            Characters[i] = CharacterObjects[i].GetComponent<VN_CharacterScript>();
+        }
+
 
         // Makes it so dialogue will instantly start
         timer = talkSpeed;
+
     }
 
     void Update()
@@ -109,6 +114,24 @@ public class VN_LogicScript : MonoBehaviour
 
         while (continueScript)
         {
+            if (script[scriptIndex + 1] == "BG") { wantedCharacter = 0;}
+            else if (script[scriptIndex + 1] == "Ebony") { wantedCharacter = 1; }
+            else if (script[scriptIndex + 1] == "King Kavi") { wantedCharacter = 2; }
+            else if (script[scriptIndex + 1] == "Fake Foul") { wantedCharacter = 3; }
+            else if (script[scriptIndex + 1] == "Foul") { wantedCharacter = 4; }
+            else if (script[scriptIndex + 1] == "Chimera") { wantedCharacter = 5; }
+            else if (script[scriptIndex + 1] == "Ushabti") { wantedCharacter = 6; }
+            else if (script[scriptIndex + 1] == "Wendigo") { wantedCharacter = 7; }
+            else if (script[scriptIndex + 1] == "Alerion") { wantedCharacter = 8; }
+            else if (script[scriptIndex + 1] == "Basil") { wantedCharacter = 9; }
+            else if (script[scriptIndex + 1] == "Hydra") { wantedCharacter = 10; }
+            else if (script[scriptIndex + 1] == "Tsuchigumo") { wantedCharacter = 11; }
+            else if (script[scriptIndex + 1] == "Vetala") { wantedCharacter = 12; }
+            else { wantedCharacter = 0; }
+
+
+
+            // Commands
             if (script[scriptIndex] == "Say")
             {
                 say();
@@ -153,6 +176,8 @@ public class VN_LogicScript : MonoBehaviour
             {
                 error(true);
             }
+
+            //print(scriptIndex);
         }
 
         if (UnityEngine.Input.GetKeyDown(KeyCode.Tab) && (allowContinue | PreviousDialogue.activeSelf))
@@ -215,21 +240,7 @@ public class VN_LogicScript : MonoBehaviour
         // 7 in either direction starts to go out of bounds
         // 25 is considered to be the default "gone" spot
 
-        if (script[scriptIndex + 1] == "Yoomtah")
-        {
-            Character1.Appear(script[scriptIndex + 2]);
-        }
-
-        else if (script[scriptIndex + 1] == "Kiane")
-        {
-            Character2.Appear(script[scriptIndex + 2]);
-        }
-
-        else
-        {
-            error(false);
-        }
-
+        Characters[wantedCharacter].Appear(script[scriptIndex + 2]);
         scriptIndex += 3;
     }
 
@@ -240,36 +251,13 @@ public class VN_LogicScript : MonoBehaviour
         // Want to find a way to just input the character's variable into a function
         // So that this whole segemnt can just be a function
 
-        if (script[scriptIndex + 1] == "Yoomtah")
-        {
-            Character1.Move(script[scriptIndex + 2], script[scriptIndex + 3]);
-        }
-
-        else if (script[scriptIndex + 1] == "Kiane")
-        {
-            Character2.Move(script[scriptIndex + 2], script[scriptIndex + 3]);
-        }
-
-        else
-        {
-            error(false);
-        }
-
+        Characters[wantedCharacter].Move(script[scriptIndex + 2], script[scriptIndex + 3]);
         scriptIndex += 4;
     }
 
     void change()
     {
-        if (script[scriptIndex + 1] == "Yoomtah")
-        {
-            Character1.Change(script[scriptIndex + 2]);
-        }
-
-        else if (script[scriptIndex + 1] == "Kiane")
-        {
-            Character2.Change(script[scriptIndex + 2]);
-        }
-
+        Characters[wantedCharacter].Change(script[scriptIndex + 2]);
         scriptIndex += 3;
     }
 
@@ -323,6 +311,8 @@ public class VN_LogicScript : MonoBehaviour
     void end()
     {
         // Will be used to end the script
+        // Should pass end code at some point
+
         continueScript = false;
         allowContinue = false;
     }
