@@ -16,6 +16,16 @@ public class VN_LogicScript : MonoBehaviour
     string[] arrayTargetTextBox;
     int arrayTargetTextBoxIndex;
 
+    public GameObject PreviousDialogue;
+    public Text[] pastDialogue;
+    public Text[] pastName;
+
+    public GameObject choiceUI;
+    public Text choice1Text;
+    public Text choice2Text;
+    int choice1Index;
+    int choice2Index;
+
 
     public GameObject scriptFinder;
 
@@ -62,7 +72,7 @@ public class VN_LogicScript : MonoBehaviour
         // Detects Space, Keyboard Enter, and Left Mouse
 
         playerInput = false;
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Space) | UnityEngine.Input.GetKeyDown(KeyCode.Return) | UnityEngine.Input.GetMouseButtonDown(0))
+        if (PreviousDialogue.activeSelf == false && (UnityEngine.Input.GetKeyDown(KeyCode.Space) | UnityEngine.Input.GetKeyDown(KeyCode.Return) | UnityEngine.Input.GetMouseButtonDown(0)))
         {
             playerInput = true;
         }
@@ -102,7 +112,7 @@ public class VN_LogicScript : MonoBehaviour
 
             else if (script[scriptIndex] == "Branch")
             {
-                branch();
+                branch(int.Parse(script[scriptIndex + 1]));
             }
 
             else if (script[scriptIndex] == "Choice")
@@ -112,7 +122,7 @@ public class VN_LogicScript : MonoBehaviour
 
             else if (script[scriptIndex] == "End")
             {
-                allowContinue = false;
+                end();
             }
 
             else
@@ -120,6 +130,12 @@ public class VN_LogicScript : MonoBehaviour
                 error(true);
             }
         }
+
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Tab) && (allowContinue | PreviousDialogue.activeSelf))
+        {
+            togglePreDialogue();
+        }
+
 
         timer += Time.deltaTime;
         if (arrayTargetTextBox.Length > arrayTargetTextBoxIndex && timer >= talkSpeed)
@@ -153,6 +169,15 @@ public class VN_LogicScript : MonoBehaviour
         arrayTargetTextBox = targetTextBox.Split(" ");
         textBox.text = "";
         arrayTargetTextBoxIndex = 0;
+        
+
+        pastDialogue[2].text = pastDialogue[1].text;
+        pastDialogue[1].text = pastDialogue[0].text;
+        pastDialogue[0].text = script[scriptIndex + 2];
+        pastName[2].text = pastName[1].text;
+        pastName[1].text = pastName[0].text;
+        pastName[0].text = script[scriptIndex + 1];
+
         scriptIndex += 3;
         continueScript = false;
         allowContinue = false;
@@ -231,27 +256,60 @@ public class VN_LogicScript : MonoBehaviour
         scriptIndex += 2;
     }
 
-    void branch()
+    void branch(int branchPoint)
     {
         // Will be used to jump to different parts of the script
 
-        scriptIndex += 2;
+        scriptIndex = branchPoint;
     }
 
     void choice()
     {
         // Will be used to make descisions
+        choiceUI.SetActive(true);
+        choice1Text.text = script[scriptIndex + 1];
+        choice1Index = int.Parse(script[scriptIndex + 2]);
+        choice2Text.text = script[scriptIndex + 3];
+        choice2Index = int.Parse(script[scriptIndex + 4]);
 
+        continueScript = false;
         allowContinue = false;
     }
 
-    void choiceMade()
+    public void choiceMade(int choiceNum)
     {
         // Will be used to make descisions
 
+        continueScript = true;
         allowContinue = true;
-        branch();
+        choiceUI.SetActive(false);
+
+        if (choiceNum == 1)
+        {
+            branch(choice1Index);
+        }
+
+        else
+        {
+            branch(choice2Index);
+        }
     }
+
+
+    void end()
+    {
+        // Will be used to end the script
+        continueScript = false;
+        allowContinue = false;
+    }
+
+
+    void togglePreDialogue()
+    {
+        PreviousDialogue.SetActive(!PreviousDialogue.activeSelf);
+        allowContinue = !PreviousDialogue.activeSelf;
+    }
+
 
     void error(bool advance)
     {
