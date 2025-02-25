@@ -1177,6 +1177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 1535582439}
   nameBox: {fileID: 329123450}
+  PreviousDialogue: {fileID: 1251410395}
   pastDialogue:
   - {fileID: 1671624476}
   - {fileID: 976575772}
