@@ -26,6 +26,8 @@ public class VN_LogicScript : MonoBehaviour
 
     int scriptIndex = 0;
     bool continueScript = true;
+    bool allowContinue = true;
+    bool playerInput = false;
 
     public float talkSpeed = 0.001f;
     float timer;
@@ -58,7 +60,15 @@ public class VN_LogicScript : MonoBehaviour
         // Checks if player wants to progress in the script.
         // If they wish to then the loop will begin
         // Detects Space, Keyboard Enter, and Left Mouse
+
+        playerInput = false;
         if (UnityEngine.Input.GetKeyDown(KeyCode.Space) | UnityEngine.Input.GetKeyDown(KeyCode.Return) | UnityEngine.Input.GetMouseButtonDown(0))
+        {
+            playerInput = true;
+        }
+
+
+        if (allowContinue && playerInput)
         {
             continueScript = true;
         }
@@ -90,9 +100,19 @@ public class VN_LogicScript : MonoBehaviour
                 sound();
             }
 
-            else if (script[scriptIndex] == "Choose")
+            else if (script[scriptIndex] == "Branch")
             {
-                choose();
+                branch();
+            }
+
+            else if (script[scriptIndex] == "Choice")
+            {
+                choice();
+            }
+
+            else if (script[scriptIndex] == "End")
+            {
+                allowContinue = false;
             }
 
             else
@@ -106,6 +126,18 @@ public class VN_LogicScript : MonoBehaviour
         {
             advanceDialogue();
             timer = 0;
+        }
+        else if (arrayTargetTextBox.Length == arrayTargetTextBoxIndex)
+        {
+            allowContinue = true;
+        }
+        else if (!allowContinue && playerInput)
+        {
+            textBox.text = targetTextBox;
+            arrayTargetTextBoxIndex = arrayTargetTextBox.Length;
+            allowContinue = true;
+            audioSource.clip = talkSound;
+            audioSource.Play();
         }
 
 
@@ -123,6 +155,7 @@ public class VN_LogicScript : MonoBehaviour
         arrayTargetTextBoxIndex = 0;
         scriptIndex += 3;
         continueScript = false;
+        allowContinue = false;
     }
 
     void appear()
@@ -198,11 +231,26 @@ public class VN_LogicScript : MonoBehaviour
         scriptIndex += 2;
     }
 
-    void choose()
+    void branch()
+    {
+        // Will be used to jump to different parts of the script
+
+        scriptIndex += 2;
+    }
+
+    void choice()
     {
         // Will be used to make descisions
 
-        scriptIndex += 1;
+        allowContinue = false;
+    }
+
+    void choiceMade()
+    {
+        // Will be used to make descisions
+
+        allowContinue = true;
+        branch();
     }
 
     void error(bool advance)
@@ -224,6 +272,7 @@ public class VN_LogicScript : MonoBehaviour
         }
 
         continueScript = false;
+        allowContinue = true;
     }
 
     void advanceDialogue()

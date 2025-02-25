@@ -11,7 +11,9 @@ public class VN_Scripts : MonoBehaviour
     // , "Move", "Name" , "Location" , "Speed"
     // , "Change", "Name" , "SpriteNum" 
     // , "Sound", "SoundName"
-    //
+    // , "Branch", "NewScriptIndex"
+    // , "Choice", "ChoiceText1", "ChoiceIndex1", "ChoiceText2", "ChoiceIndex2"
+    // , "End"
 
 
 
@@ -21,16 +23,17 @@ public class VN_Scripts : MonoBehaviour
         {
             string[] testScript =
             {
-            "Appear", "Yoomtah", "-5",
-            "Appear", "Kiane", "5",
-            "Say", "Yoomtah", "This is the first text box. After this we will both move.",
-            "Move", "Yoomtah", "5", "3",
-            "Move", "Kiane", "-5", "5",
-            "Say", "Kiane", "Wow how exciting!!!!! \n !!!!!!!!!!",
-            "Sound", "KianeYay",
-            "Say", "Yoomtah", "I will now change spites to be purple",
-            "Change", "Yoomtah", "1",
-            "Say", "Kiane", "Why don't I get a second sprite :'("
+            "Appear", "Yoomtah", "-5"
+            , "Appear", "Kiane", "5"
+            , "Say", "Yoomtah", "This is the first text box. After this we will both move."
+            , "Move", "Yoomtah", "5", "3"
+            , "Move", "Kiane", "-5", "5"
+            , "Say", "Kiane", "Wow how exciting!!!!! \n !!!!!!!!!!"
+            , "Sound", "KianeYay"
+            , "Say", "Yoomtah", "I will now change spites to be purple"
+            , "Change", "Yoomtah", "1"
+            , "Say", "Kiane", "Why don't I get a second sprite :'("
+            , "End"
             };
             return testScript;
             
