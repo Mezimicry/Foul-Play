@@ -13,7 +13,7 @@ public class VN_CharacterScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     void Update()
