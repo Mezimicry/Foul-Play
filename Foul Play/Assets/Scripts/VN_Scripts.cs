@@ -18,6 +18,9 @@ public class VN_Scripts : MonoBehaviour
     // , "Choice", "ChoiceText1", "ChoiceIndex1", "ChoiceText2", "ChoiceIndex2"
     // Gives the player 2 options that will send them to different parts of the script
 
+    // , "Disappear", "Name"
+    // Sends character back to origin
+
     // , "End", "End Code"
     // Ends the VN segement
     // Will also pass the end code so the game knows how you did in the VN
@@ -42,6 +45,7 @@ public class VN_Scripts : MonoBehaviour
     // , "Branch", "NewScriptIndex"
     // , "Change", "Name" , "SpriteNum" 
     // , "Choice", "ChoiceText1", "ChoiceIndex1", "ChoiceText2", "ChoiceIndex2"
+    // , "Disappear", "Name"
     // , "End", "EndCode"
     // , "Move", "Name" , "Location" , "Speed"
     // , "Say", "Name", "Text"
@@ -60,7 +64,7 @@ public class VN_Scripts : MonoBehaviour
             "Appear", "Ebony", "-5" 
             , "Appear", "Fake Foul", "5"
             , "Change", "Ebony", "0"
-            , "Appear", "King Kavi" , "25"
+            , "Disappear", "King Kavi"
             , "Say", "Ebony", "Hello Foul This is a Text Box"
             , "Move", "Ebony", "5", "3" 
             , "Move", "Fake Foul", "-5", "5" 
@@ -69,12 +73,12 @@ public class VN_Scripts : MonoBehaviour
             , "Say", "Ebony", "Oh no. Please don't take me and dye my hair." 
             , "Change", "Ebony", "1" 
             , "Say", "Foul", "wtf i didn't do that \nhow did you do that" 
-            , "Choice", "Foul is the king", "42", "Foul just looks awful", "53" 
-            , "Appear", "Fake Foul" , "25"
+            , "Choice", "Foul is the king", "41", "Foul just looks awful", "51" 
+            , "Disappear", "Fake Foul"
             , "Appear", "King Kavi" , "-5"
             , "Say", "Ebony", "Wait no thats not right pls go back"
             , "Branch", "0"
-            , "Appear", "Fake Foul" , "25"
+            , "Disappear", "Fake Foul" 
             , "Appear", "Foul" , "-5"
             , "Say", "Ebony", "No this is much worse."
             , "End", "Normal End" 

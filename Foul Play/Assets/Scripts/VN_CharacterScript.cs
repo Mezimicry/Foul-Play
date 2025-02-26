@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class VN_CharacterScript : MonoBehaviour
 {
@@ -12,10 +13,21 @@ public class VN_CharacterScript : MonoBehaviour
     // If the code for moving needs to run
     bool needToMove = false;
 
+
     // Array that holds all of the character's sprites
     public Sprite[] sprites;
 
-        void Update()
+
+    // For returning the character to their original possitions
+    Vector2 origin = new Vector2(0,0);
+
+    void Start()
+    {
+        origin = new Vector2(transform.position.x, transform.position.y);
+    }
+
+
+    void Update()
     {
         // This code only runs when the character need to move
         if (needToMove)
@@ -35,24 +47,24 @@ public class VN_CharacterScript : MonoBehaviour
     }
 
     // Instantly makes the character be in its desired location
-    public void Appear(string sxAxis)
+    public void Appear(float xAxis)
     {
-        // Stores the desired xAxis
-        // Need to parse as the array stores them as a string
-        float xAxis = float.Parse(sxAxis);
-
-        // Sets the character to be at the value
         transform.localPosition = new Vector2(xAxis, 0);
-        targetDesination = xAxis;
     }
 
+    // Returns the character to their origianl positon 
+    public void Disappear()
+    {
+        transform.localPosition = origin;
+    }
+
+
     // Moves the character to its desired location over time
-    public void Move(string sXAxis, string sSpeed)
+    public void Move(float xAxis, float speed)
     {
         // Sets the desination and speed
-        // Need to parse as the array stores them as a string
-        targetDesination = float.Parse(sXAxis);
-        targetSpeed = float.Parse(sSpeed);
+        targetDesination = xAxis;
+        targetSpeed = speed;
 
         // Every frame the character will now run the move code
         needToMove = true;
@@ -69,9 +81,9 @@ public class VN_CharacterScript : MonoBehaviour
     }
 
     // Changes the characters sprite
-    public void Change(string spriteNumber)
+    public void Change(int spriteNumber)
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = sprites[int.Parse(spriteNumber)];
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprites[spriteNumber];
     }
 
 }

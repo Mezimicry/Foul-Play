@@ -10,17 +10,31 @@ using static UnityEngine.ParticleSystem;
 
 public class VN_LogicScript : MonoBehaviour
 {
+    // Allows access to main logic script
+    public GameObject mainlogicscript;
+
+
+
     // Variables used for Say
+    // Used to write to the text box
     public Text textBox;
     public Text nameBox;
+
+    // Used to fill the text box
     string targetTextBox;
     string[] arrayTargetTextBox;
     int arrayTargetTextBoxIndex;
-    public float talkSpeed = 0.001f;
+
+    // Used to time how ofter text is added
+    public float talkSpeed;
     float timer;
+
+    // Used for the past dialogue screen
     public GameObject PreviousDialogue;
     public Text[] pastDialogue;
     public Text[] pastName;
+
+    // Used to the blips when talking
     public AudioClip talkSound;
     AudioSource audioSource;
 
@@ -42,7 +56,7 @@ public class VN_LogicScript : MonoBehaviour
 
     // Used for script
     // The objects the scripts are stored in
-    public GameObject scriptFinder;
+    public GameObject soundEffectManager;
 
     // Is set to choose the wanted script
     public string desiredScript;
@@ -76,9 +90,10 @@ public class VN_LogicScript : MonoBehaviour
     int wantedCharacter;
 
 
+    
     void Start()
     {
-        script = scriptFinder.GetComponent<VN_Scripts>().returnScript(desiredScript);
+        script = GetComponent<VN_Scripts>().returnScript(gameManager.getVN_Script());
 
         audioSource = GetComponent<AudioSource>();
 
@@ -91,6 +106,7 @@ public class VN_LogicScript : MonoBehaviour
 
         // Makes it so dialogue will instantly start
         timer = talkSpeed;
+
 
     }
 
@@ -106,14 +122,16 @@ public class VN_LogicScript : MonoBehaviour
             playerInput = true;
         }
 
-
+        // If the player inputs and continue can happen then it will continue
         if (allowContinue && playerInput)
         {
             continueScript = true;
         }
 
+        // Goes through the instructions in the script
         while (continueScript)
         {
+            // Converts text name to array
             if (script[scriptIndex + 1] == "BG") { wantedCharacter = 0;}
             else if (script[scriptIndex + 1] == "Ebony") { wantedCharacter = 1; }
             else if (script[scriptIndex + 1] == "King Kavi") { wantedCharacter = 2; }
@@ -131,30 +149,10 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-            // Commands
-            if (script[scriptIndex] == "Say")
+            // Commands from the script
+            if (script[scriptIndex] == "Appear")
             {
-                say();
-            }
-
-            else if (script[scriptIndex] == "Appear")
-            {
-                appear();
-            }
-
-            else if (script[scriptIndex] == "Move")
-            {
-                move();
-            }
-
-            else if (script[scriptIndex] == "Change")
-            {
-                change();
-            }
-
-            else if (script[scriptIndex] == "Sound")
-            {
-                sound();
+                appear(Characters[wantedCharacter], float.Parse(script[scriptIndex + 2]));
             }
 
             else if (script[scriptIndex] == "Branch")
@@ -162,14 +160,39 @@ public class VN_LogicScript : MonoBehaviour
                 branch(int.Parse(script[scriptIndex + 1]));
             }
 
+            else if (script[scriptIndex] == "Change")
+            {
+                change(Characters[wantedCharacter], int.Parse(script[scriptIndex + 2]));
+            }
+
             else if (script[scriptIndex] == "Choice")
             {
-                choice();
+                choice(script[scriptIndex + 1], int.Parse(script[scriptIndex + 2]), script[scriptIndex + 3], int.Parse(script[scriptIndex + 4]));
+            }
+
+            else if (script[scriptIndex] == "Disappear")
+            {
+                disappear(Characters[wantedCharacter]);
             }
 
             else if (script[scriptIndex] == "End")
             {
-                end();
+                end(script[scriptIndex + 1]);
+            }
+
+            else if (script[scriptIndex] == "Move")
+            {
+                move(Characters[wantedCharacter], float.Parse(script[scriptIndex + 2]), float.Parse(script[scriptIndex + 3]));
+            }
+
+            else if (script[scriptIndex] == "Say")
+            {
+                say(script[scriptIndex + 1], script[scriptIndex + 2]);
+            }
+
+            else if (script[scriptIndex] == "Sound")
+            {
+                sound(script[scriptIndex + 1]);
             }
 
             else
@@ -177,25 +200,30 @@ public class VN_LogicScript : MonoBehaviour
                 error(true);
             }
 
-            //print(scriptIndex);
         }
 
+        // Shows the previous dialogue menu when the user presses tab and they can continue
+        // Hides the menu when it is open
         if (UnityEngine.Input.GetKeyDown(KeyCode.Tab) && (allowContinue | PreviousDialogue.activeSelf))
         {
             togglePreDialogue();
         }
 
 
+        // increases the timer
         timer += Time.deltaTime;
+        // When its been enough time the text will be added to the box
         if (arrayTargetTextBox.Length > arrayTargetTextBoxIndex && timer >= talkSpeed)
         {
             advanceDialogue();
             timer = 0;
         }
+        // Allows continuing again once the end of the text is reached
         else if (arrayTargetTextBox.Length == arrayTargetTextBoxIndex)
         {
             allowContinue = true;
         }
+        // Skips to the end of the text if player inputs
         else if (!allowContinue && playerInput)
         {
             textBox.text = targetTextBox;
@@ -208,90 +236,70 @@ public class VN_LogicScript : MonoBehaviour
 
     }
 
-    void say()
+
+
+    // Adds the next part of text to the box
+    // Also plays the talk sound
+    void advanceDialogue()
     {
-        //Shows text + speaker
-        //Waits for next input until continues to next command
+        textBox.text += (arrayTargetTextBox[arrayTargetTextBoxIndex] += " ");
 
-        nameBox.text = script[scriptIndex + 1];
-        targetTextBox = script[scriptIndex + 2];
-        arrayTargetTextBox = targetTextBox.Split(" ");
-        textBox.text = "";
-        arrayTargetTextBoxIndex = 0;
-        
-
-        pastDialogue[2].text = pastDialogue[1].text;
-        pastDialogue[1].text = pastDialogue[0].text;
-        pastDialogue[0].text = script[scriptIndex + 2];
-        pastName[2].text = pastName[1].text;
-        pastName[1].text = pastName[0].text;
-        pastName[0].text = script[scriptIndex + 1];
-
-        scriptIndex += 3;
-        continueScript = false;
-        allowContinue = false;
+        audioSource.clip = talkSound;
+        audioSource.Play();
+        arrayTargetTextBoxIndex += 1;
     }
 
-    void appear()
-    {
-        // Teleports Character
-        // First one after code is the character
-        // Second one is the location on the x axis
-        // 7 in either direction starts to go out of bounds
-        // 25 is considered to be the default "gone" spot
 
-        Characters[wantedCharacter].Appear(script[scriptIndex + 2]);
+
+    // Teleports Character
+    // First one after code is the character
+    // Second one is the location on the x axis
+    // 7 in either direction starts to go out of bounds
+    void appear(VN_CharacterScript Character, float xAxis)
+    {
+        Character.Appear(xAxis);
         scriptIndex += 3;
     }
 
-    void move()
-    {
-        // Moves Character
-        // Give speed to change how fast it moves
-        // Want to find a way to just input the character's variable into a function
-        // So that this whole segemnt can just be a function
 
-        Characters[wantedCharacter].Move(script[scriptIndex + 2], script[scriptIndex + 3]);
-        scriptIndex += 4;
-    }
 
-    void change()
-    {
-        Characters[wantedCharacter].Change(script[scriptIndex + 2]);
-        scriptIndex += 3;
-    }
-
-    void sound()
-    {
-        // Will be used to make sounds play
-        scriptFinder.GetComponent<VN_SoundLibrary>().playSound(script[scriptIndex + 1]);
-        scriptIndex += 2;
-    }
-
+    // Will be used to jump to different parts of the script
     void branch(int branchPoint)
     {
-        // Will be used to jump to different parts of the script
-
         scriptIndex = branchPoint;
     }
 
-    void choice()
+
+
+    // Changes the sprite of a given character
+    void change(VN_CharacterScript character, int spriteNumber)
     {
-        // Will be used to make descisions
+        character.Change(spriteNumber);
+        scriptIndex += 3;
+    }
+
+
+
+    // Give the user 2 choices
+    // They can not continue unless they press one of them
+    void choice(string option1, int option1Index, string option2, int option2Index)
+    {
         choiceUI.SetActive(true);
-        choice1Text.text = script[scriptIndex + 1];
-        choice1Index = int.Parse(script[scriptIndex + 2]);
-        choice2Text.text = script[scriptIndex + 3];
-        choice2Index = int.Parse(script[scriptIndex + 4]);
+        choice1Text.text = option1;
+        choice1Index = option1Index;
+        choice2Text.text = option2;
+        choice2Index = option2Index;
 
         continueScript = false;
         allowContinue = false;
     }
 
+
+
+    // Called by the choice buttons
+    // Branches to the choice made
     public void choiceMade(int choiceNum)
     {
-        // Will be used to make descisions
-
         continueScript = true;
         allowContinue = true;
         choiceUI.SetActive(false);
@@ -308,30 +316,34 @@ public class VN_LogicScript : MonoBehaviour
     }
 
 
-    void end()
-    {
-        // Will be used to end the script
-        // Should pass end code at some point
 
+    // Moves character to origin
+    void disappear(VN_CharacterScript Character)
+    {
+        Character.Disappear();
+        scriptIndex += 2;
+    }
+
+
+
+    // Prevents script from continuing
+    // Passes endCode to the gameManager
+    // Needs to end or hide scene 
+    void end(string endCode)
+    {
+
+        gameManager.setVN_exitCode(endCode);
         continueScript = false;
         allowContinue = false;
     }
 
 
-    void togglePreDialogue()
-    {
-        PreviousDialogue.SetActive(!PreviousDialogue.activeSelf);
-        allowContinue = !PreviousDialogue.activeSelf;
-    }
 
-
+    // When a command doesn't execute properly the user is told
+    // If no command executes then it will advance 1 index at a time
+    // If a command executed but didn't have a target then it won't advance
     void error(bool advance)
     {
-        // When a command doesn't execute properly the user is told
-        // If no command executes then it will advance 1 index at a time
-        // If a command executed but didn't have a target then it won't advance
-
-
         nameBox.text = "Phox";
         targetTextBox = "There was a problem on line " + scriptIndex;
         arrayTargetTextBox = targetTextBox.Split(" ");
@@ -347,13 +359,56 @@ public class VN_LogicScript : MonoBehaviour
         allowContinue = true;
     }
 
-    void advanceDialogue()
-    {
-        textBox.text += (arrayTargetTextBox[arrayTargetTextBoxIndex] += " ");
 
-        audioSource.clip = talkSound;
-        audioSource.Play();
-        arrayTargetTextBoxIndex += 1;
+
+    // Moves Character
+    // Give speed to change how fast it moves
+    void move(VN_CharacterScript character, float xAxis, float speed)
+    {
+        character.Move(xAxis, speed);
+        scriptIndex += 4;
+    }
+
+
+
+    // Opens and closes previous dialogue menu
+    void togglePreDialogue()
+    {
+        PreviousDialogue.SetActive(!PreviousDialogue.activeSelf);
+        allowContinue = !PreviousDialogue.activeSelf;
+    }
+
+
+
+    // Shows text + speaker
+    // Waits for next input until continues to next command
+    void say(string name, string dialogue)
+    {
+        nameBox.text = name;
+        targetTextBox = dialogue;
+        arrayTargetTextBox = targetTextBox.Split(" ");
+        textBox.text = "";
+        arrayTargetTextBoxIndex = 0;
+
+        pastDialogue[2].text = pastDialogue[1].text;
+        pastDialogue[1].text = pastDialogue[0].text;
+        pastDialogue[0].text = script[scriptIndex + 2];
+        pastName[2].text = pastName[1].text;
+        pastName[1].text = pastName[0].text;
+        pastName[0].text = script[scriptIndex + 1];
+
+        scriptIndex += 3;
+        continueScript = false;
+        allowContinue = false;
+    }
+
+
+
+    // Plays sound
+    void sound(string soundName)
+    {
+        soundEffectManager.GetComponent<VN_SoundLibrary>().playSound(soundName);
+        scriptIndex += 2;
     }
 
 
