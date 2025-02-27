@@ -1,0 +1,8 @@
+if (scriptName == "CreateScript")
+{
+string[,] script =
+{
+            {"Appear", "" , "1", "", ""}
+            };
+return script;
+}

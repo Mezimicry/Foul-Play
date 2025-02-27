@@ -52,6 +52,9 @@ public class VN_LogicScript : MonoBehaviour
     int choice1Index;
     int choice2Index;
 
+    // Stops the script from continuing while a choice is needed
+    bool choiceTime = false;
+
 
 
     // Used for script
@@ -130,7 +133,7 @@ public class VN_LogicScript : MonoBehaviour
         }
 
         // Goes through the instructions in the script
-        while (continueScript && !gameManager.getMain_Paused())
+        while (continueScript && !choiceTime && !gameManager.getMain_Paused())
         {
             // Converts text name to array
             if (script[scriptIndex , 1] == "BG") { wantedCharacter = 0;}
@@ -291,6 +294,7 @@ public class VN_LogicScript : MonoBehaviour
         choice2Text.text = option2;
         choice2Index = option2Index;
 
+        choiceTime = true;
         continueScript = false;
         allowContinue = false;
     }
@@ -301,8 +305,10 @@ public class VN_LogicScript : MonoBehaviour
     // Branches to the choice made
     public void choiceMade(int choiceNum)
     {
+        choiceTime = false;
         continueScript = true;
         allowContinue = true;
+        
         choiceUI.SetActive(false);
 
         if (choiceNum == 1)
