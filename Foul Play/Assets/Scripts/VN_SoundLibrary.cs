@@ -15,7 +15,7 @@ public class VN_SoundLibrary : MonoBehaviour
     {
         // Sets the audio source
         audioSource = GetComponent<AudioSource>();
-        audioSource.volume = (gameManager.getMain_Volume() * 0.01f);
+        audioSource.volume = (gameManager.getMain_SoundEffectVolume());
     }
 
 
@@ -23,7 +23,7 @@ public class VN_SoundLibrary : MonoBehaviour
     {
         if (gameManager.Main_paused)
         {
-            audioSource.volume = (gameManager.getMain_Volume() * 0.01f);
+            audioSource.volume = (gameManager.getMain_SoundEffectVolume());
         }
     }
 

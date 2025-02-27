@@ -9,8 +9,11 @@ public class VN_Scripts : MonoBehaviour
     // , {"Appear", "Name", "Location" , "", ""}
     // Moves the character instantly
 
-    // , {"Branch", "NewScriptIndex" , "", "", ""}
+    // , {"Branch", "PointName" , "", "", ""}
     // Changes location in the script
+
+    // , {"Branch Point", "PointName" , "", "", ""}
+    // Saves a name for a location to branch to
 
     // , {"Change", "Name" , "SpriteNum" , "", ""}
     // Changes the diresired character's sprite
@@ -43,6 +46,7 @@ public class VN_Scripts : MonoBehaviour
 
     // , {"Appear", "Name", "Location" , "", ""}
     // , {"Branch", "NewScriptIndex" , "", "", ""}
+    // , {"Branch Point", "PointName" , "", "", ""}
     // , {"Change", "Name" , "SpriteNum" , "", ""}
     // , {"Choice", "ChoiceText1", "ChoiceIndex1", "ChoiceText2", "ChoiceIndex2"}
     // , {"Disappear", "Name" , "", "", ""}
@@ -61,54 +65,33 @@ public class VN_Scripts : MonoBehaviour
         {
             string[,] testScript =
             {
-/* 0 */     {"Appear", "Ebony", "-5" , "", ""},
+            {"Branch Point", "Start" , "", "", ""}, 
+            {"Appear", "Ebony", "-5" , "", ""},
             {"Appear", "Fake Foul", "5" , "", ""},
             {"Change", "Ebony", "0" , "" , ""  },
             {"Disappear", "King Kavi" , "" , ""  , ""  },
             {"Say", "Ebony", "Hello Foul This is a Text Box" , ""  , ""  },
-/* 5 */     {"Move", "Ebony", "5", "3"  , "" },
+            {"Move", "Ebony", "5", "3"  , "" },
             {"Move", "Fake Foul", "-5", "5"  , "" },
             {"Say", "Foul", "I am the villian of the game and by passing you I have now kidnapped you." , ""  , ""  },
             {"Sound", "KianeYay"  , ""  , "" , "" },
             {"Say", "Ebony", "Oh no. Please don't take me and dye my hair." , ""  , "" },
-/* 10 */    {"Change", "Ebony", "1"  , ""  , "" },
+            {"Change", "Ebony", "1"  , ""  , "" },
             {"Say", "Foul", "wtf i didn't do that \nhow did you do that"  , ""  , "" },
-            {"Choice", "Foul is the king", "13", "Foul just looks awful", "17" },
+            {"Choice", "Foul is the king", "FoulKing", "Foul just looks awful", "FoulBad" },
+            {"Branch Point", "FoulKing" , "", "", ""},
             {"Disappear", "Fake Foul" , ""  , ""  , ""  },
             {"Appear", "King Kavi" , "-5"  , ""  , "" },
-/* 15 */    {"Say", "Ebony", "Wait no thats not right pls go back"  , ""  , "" },
-            {"Branch", "0" , ""  , ""  , "" },
+            {"Say", "Ebony", "Wait no thats not right pls go back"  , ""  , "" },
+            {"Branch", "Start" , ""  , ""  , "" },
+            {"Branch Point", "FoulBad" , "", "", ""},
             {"Disappear", "Fake Foul"  , ""  , ""  , "" },
             {"Appear", "Foul" , "-5"  , ""  , "" },
             {"Say", "Ebony", "No this is much worse." , ""  , ""  },
-/* 20 */    {"End", "Normal End"  , ""  , ""  , "" },
+            {"End", "Normal End"  , ""  , ""  , "" },
             };
             return testScript;
         }
-
-        if (scriptName == "GeneratedScript")
-        {
-            string[,] GeneratedScript =
-            {
-            {"Appear", "Ebony" , "3", "", ""},
-            {"Appear", "Foul" , "-3", "", ""},
-            {"Say", "Ebony" , "This script was put together by python", "", ""},
-            {"Move", "Ebony" , "-5", "2", ""},
-            {"Change", "Ebony" , "1", "", ""},
-            {"Sound", "KianeYay" , "", "", ""},
-            {"Say", "Foul" , "There may still be a few issues but it massively speeds up creating this", "", ""},
-            {"Choice", "See problems" , "8", "Ignore them", "13"},
-            {"Say", "Foul" , "One problem is lines can't currently be removed", "", ""},
-            {"Say", "Foul" , "Also the formatting is a bit strange", "", ""},
-            {"Disappear", "Foul" , "", "", ""},
-            {"Say", "Ebony" , "Oh no he was killed for saying that", "", ""},
-            {"Branch", "0" , "", "", ""},
-            {"Say", "Phox" , "There are no issues", "", ""},
-            {"End", "YouWin" , "", "", ""}
-            };
-            return GeneratedScript;
-        }
-
 
         string[,] errorScript =
         {

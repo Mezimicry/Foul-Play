@@ -18,13 +18,17 @@ public class Main_LogicScript : MonoBehaviour
     // Used so the unpause button in the settings only shows up when the game is paused
     public GameObject settingsUnpauseButton;
 
-
-    public Text volumeShower;
-    public Slider volumeSlider;
+    // Used for volume
+    public Text masterVolumeShower;
+    public Slider masterVolumeSlider;
+    public Text musicVolumeShower;
+    public Slider musicVolumeSlider;
+    public Text soundEffectVolumeShower;
+    public Slider soundEffectVolumeSlider;
 
     void Start()
     {
-        
+        gameManager.setMain_wantedMusic("Title Screen");
     }
 
     void Update()
@@ -37,8 +41,14 @@ public class Main_LogicScript : MonoBehaviour
 
         if (settingsMenu.activeSelf)
         {
-            gameManager.setMain_Volume(volumeSlider.value);
-            volumeShower.text = volumeSlider.value.ToString();
+            gameManager.setMain_MasterVolume(masterVolumeSlider.value);
+            masterVolumeShower.text = masterVolumeSlider.value.ToString();
+
+            gameManager.setMain_MusicVolume(musicVolumeSlider.value);
+            musicVolumeShower.text = musicVolumeSlider.value.ToString();
+
+            gameManager.setMain_SoundEffectVolume(soundEffectVolumeSlider.value);
+            soundEffectVolumeShower.text = soundEffectVolumeSlider.value.ToString();
         }
     }
 
@@ -50,6 +60,7 @@ public class Main_LogicScript : MonoBehaviour
     {
         // Stores the wanted script into the game manager so the VN knows what scene is wanted
         gameManager.setVN_Script(wantedScript);
+        gameManager.setMain_wantedMusic("VNTest");
         SceneManager.LoadScene("Visual Novel", LoadSceneMode.Additive);
         titleScreen.SetActive(false);
     }

@@ -9,7 +9,10 @@ using UnityEngine.SocialPlatforms.Impl;
 public static class gameManager
 {
     public static bool Main_paused = false;
-    public static float Main_volume = 50;
+    public static float Main_masterVolume = 50;
+    public static float Main_musicVolume = 50;
+    public static float Main_soundEffectVolume = 50;
+    public static string Main_wantedMusic = "Title Screen";
     public static string VN_scriptName = "NoScript";
     public static string VN_exitCode = "NoExitCode";
     
@@ -39,6 +42,17 @@ public static class gameManager
 
 
 
+    // Used for changing the music
+    public static void setMain_wantedMusic(string wantedMusic)
+    {
+        Main_wantedMusic = wantedMusic;
+    }
+    public static string getMain_wantedMusic()
+    {
+        return Main_wantedMusic;
+    }
+
+
     // To know if the game is meant to be paused
     public static void setMain_Paused(bool paused)
     {
@@ -52,22 +66,31 @@ public static class gameManager
 
 
     // Used to store the volume
-    public static void setMain_Volume(float volume)
+    public static void setMain_MasterVolume(float volume)
     {
-        Main_volume = volume;
-
-        if (Main_volume > 100)
-        {
-            Main_volume = 100;
-        }
-        else if (Main_volume < 0)
-        {
-            Main_volume = 0;
-        }
+        Main_masterVolume = volume;
     }
-    public static float getMain_Volume()
+    public static float getMain_MasterVolume()
     {
-        return Main_volume;
+        return Main_masterVolume;
+    }
+
+    public static void setMain_MusicVolume(float volume)
+    {
+        Main_musicVolume = volume;
+    }
+    public static float getMain_MusicVolume()
+    {
+        return (Main_musicVolume / 100) * (Main_masterVolume / 100);
+    }
+
+    public static void setMain_SoundEffectVolume(float volume)
+    {
+        Main_soundEffectVolume = volume;
+    }
+    public static float getMain_SoundEffectVolume()
+    {
+        return (Main_soundEffectVolume / 100) * (Main_masterVolume / 100 );
     }
 
 }
