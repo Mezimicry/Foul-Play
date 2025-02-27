@@ -30,7 +30,7 @@ public class VN_CharacterScript : MonoBehaviour
     void Update()
     {
         // This code only runs when the character need to move
-        if (needToMove)
+        if (needToMove && !gameManager.getMain_Paused())
         {
             // Character is moved by the speed multiplied by both the time the frame took and the direction.
             transform.position += new Vector3(targetSpeed, 0, 0) * Time.deltaTime * directionMod;

@@ -58,11 +58,8 @@ public class VN_LogicScript : MonoBehaviour
     // The objects the scripts are stored in
     public GameObject soundEffectManager;
 
-    // Is set to choose the wanted script
-    public string desiredScript;
-
     // Array the script is stored in
-    string[] script;
+    string[,] script;
 
     // Stored current location in script
     int scriptIndex = 0;
@@ -93,8 +90,12 @@ public class VN_LogicScript : MonoBehaviour
     
     void Start()
     {
+        // Calls calls return script from VN_Script
+        // Calls the gameManager to get which script is wanted
         script = GetComponent<VN_Scripts>().returnScript(gameManager.getVN_Script());
 
+        // Gets the audioSource to use later
+        // Gets the audioSource to use later
         audioSource = GetComponent<AudioSource>();
 
         // Grants control over the characters
@@ -117,7 +118,7 @@ public class VN_LogicScript : MonoBehaviour
         // Detects Space, Keyboard Enter, and Left Mouse
         // Will not work if other menus are open
         playerInput = false;
-        if (PreviousDialogue.activeSelf == false && (UnityEngine.Input.GetKeyDown(KeyCode.Space) | UnityEngine.Input.GetKeyDown(KeyCode.Return) | UnityEngine.Input.GetMouseButtonDown(0)))
+        if (PreviousDialogue.activeSelf == false && !gameManager.getMain_Paused() && (UnityEngine.Input.GetKeyDown(KeyCode.Space) | UnityEngine.Input.GetKeyDown(KeyCode.Return) | UnityEngine.Input.GetMouseButtonDown(0)))
         {
             playerInput = true;
         }
@@ -129,70 +130,70 @@ public class VN_LogicScript : MonoBehaviour
         }
 
         // Goes through the instructions in the script
-        while (continueScript)
+        while (continueScript && !gameManager.getMain_Paused())
         {
             // Converts text name to array
-            if (script[scriptIndex + 1] == "BG") { wantedCharacter = 0;}
-            else if (script[scriptIndex + 1] == "Ebony") { wantedCharacter = 1; }
-            else if (script[scriptIndex + 1] == "King Kavi") { wantedCharacter = 2; }
-            else if (script[scriptIndex + 1] == "Fake Foul") { wantedCharacter = 3; }
-            else if (script[scriptIndex + 1] == "Foul") { wantedCharacter = 4; }
-            else if (script[scriptIndex + 1] == "Chimera") { wantedCharacter = 5; }
-            else if (script[scriptIndex + 1] == "Ushabti") { wantedCharacter = 6; }
-            else if (script[scriptIndex + 1] == "Wendigo") { wantedCharacter = 7; }
-            else if (script[scriptIndex + 1] == "Alerion") { wantedCharacter = 8; }
-            else if (script[scriptIndex + 1] == "Basil") { wantedCharacter = 9; }
-            else if (script[scriptIndex + 1] == "Hydra") { wantedCharacter = 10; }
-            else if (script[scriptIndex + 1] == "Tsuchigumo") { wantedCharacter = 11; }
-            else if (script[scriptIndex + 1] == "Vetala") { wantedCharacter = 12; }
+            if (script[scriptIndex , 1] == "BG") { wantedCharacter = 0;}
+            else if (script[scriptIndex , 1] == "Ebony") { wantedCharacter = 1; }
+            else if (script[scriptIndex , 1] == "King Kavi") { wantedCharacter = 2; }
+            else if (script[scriptIndex , 1] == "Fake Foul") { wantedCharacter = 3; }
+            else if (script[scriptIndex , 1] == "Foul") { wantedCharacter = 4; }
+            else if (script[scriptIndex , 1] == "Chimera") { wantedCharacter = 5; }
+            else if (script[scriptIndex , 1] == "Ushabti") { wantedCharacter = 6; }
+            else if (script[scriptIndex , 1] == "Wendigo") { wantedCharacter = 7; }
+            else if (script[scriptIndex , 1] == "Alerion") { wantedCharacter = 8; }
+            else if (script[scriptIndex , 1] == "Basil") { wantedCharacter = 9; }
+            else if (script[scriptIndex , 1] == "Hydra") { wantedCharacter = 10; }
+            else if (script[scriptIndex , 1] == "Tsuchigumo") { wantedCharacter = 11; }
+            else if (script[scriptIndex , 1] == "Vetala") { wantedCharacter = 12; }
             else { wantedCharacter = 0; }
 
 
 
             // Commands from the script
-            if (script[scriptIndex] == "Appear")
+            if (script[scriptIndex , 0] == "Appear")
             {
-                appear(Characters[wantedCharacter], float.Parse(script[scriptIndex + 2]));
+                appear(Characters[wantedCharacter], float.Parse(script[scriptIndex , 2]));
             }
 
-            else if (script[scriptIndex] == "Branch")
+            else if (script[scriptIndex , 0] == "Branch")
             {
-                branch(int.Parse(script[scriptIndex + 1]));
+                branch(int.Parse(script[scriptIndex , 1]));
             }
 
-            else if (script[scriptIndex] == "Change")
+            else if (script[scriptIndex , 0] == "Change")
             {
-                change(Characters[wantedCharacter], int.Parse(script[scriptIndex + 2]));
+                change(Characters[wantedCharacter], int.Parse(script[scriptIndex , 2]));
             }
 
-            else if (script[scriptIndex] == "Choice")
+            else if (script[scriptIndex , 0] == "Choice")
             {
-                choice(script[scriptIndex + 1], int.Parse(script[scriptIndex + 2]), script[scriptIndex + 3], int.Parse(script[scriptIndex + 4]));
+                choice(script[scriptIndex , 1], int.Parse(script[scriptIndex , 2]), script[scriptIndex , 3], int.Parse(script[scriptIndex , 4]));
             }
 
-            else if (script[scriptIndex] == "Disappear")
+            else if (script[scriptIndex , 0] == "Disappear")
             {
                 disappear(Characters[wantedCharacter]);
             }
 
-            else if (script[scriptIndex] == "End")
+            else if (script[scriptIndex , 0] == "End")
             {
-                end(script[scriptIndex + 1]);
+                end(script[scriptIndex , 1]);
             }
 
-            else if (script[scriptIndex] == "Move")
+            else if (script[scriptIndex , 0] == "Move")
             {
-                move(Characters[wantedCharacter], float.Parse(script[scriptIndex + 2]), float.Parse(script[scriptIndex + 3]));
+                move(Characters[wantedCharacter], float.Parse(script[scriptIndex , 2]), float.Parse(script[scriptIndex , 3]));
             }
 
-            else if (script[scriptIndex] == "Say")
+            else if (script[scriptIndex , 0] == "Say")
             {
-                say(script[scriptIndex + 1], script[scriptIndex + 2]);
+                say(script[scriptIndex , 1], script[scriptIndex , 2]);
             }
 
-            else if (script[scriptIndex] == "Sound")
+            else if (script[scriptIndex , 0] == "Sound")
             {
-                sound(script[scriptIndex + 1]);
+                sound(script[scriptIndex , 1]);
             }
 
             else
@@ -204,7 +205,7 @@ public class VN_LogicScript : MonoBehaviour
 
         // Shows the previous dialogue menu when the user presses tab and they can continue
         // Hides the menu when it is open
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Tab) && (allowContinue | PreviousDialogue.activeSelf))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Tab) && !gameManager.getMain_Paused() && (allowContinue | PreviousDialogue.activeSelf))
         {
             togglePreDialogue();
         }
@@ -213,7 +214,7 @@ public class VN_LogicScript : MonoBehaviour
         // increases the timer
         timer += Time.deltaTime;
         // When its been enough time the text will be added to the box
-        if (arrayTargetTextBox.Length > arrayTargetTextBoxIndex && timer >= talkSpeed)
+        if (arrayTargetTextBox.Length > arrayTargetTextBoxIndex && timer >= talkSpeed && !gameManager.getMain_Paused())
         {
             advanceDialogue();
             timer = 0;
@@ -258,7 +259,7 @@ public class VN_LogicScript : MonoBehaviour
     void appear(VN_CharacterScript Character, float xAxis)
     {
         Character.Appear(xAxis);
-        scriptIndex += 3;
+        scriptIndex += 1;
     }
 
 
@@ -275,7 +276,7 @@ public class VN_LogicScript : MonoBehaviour
     void change(VN_CharacterScript character, int spriteNumber)
     {
         character.Change(spriteNumber);
-        scriptIndex += 3;
+        scriptIndex += 1;
     }
 
 
@@ -321,7 +322,7 @@ public class VN_LogicScript : MonoBehaviour
     void disappear(VN_CharacterScript Character)
     {
         Character.Disappear();
-        scriptIndex += 2;
+        scriptIndex += 1;
     }
 
 
@@ -333,6 +334,7 @@ public class VN_LogicScript : MonoBehaviour
     {
 
         gameManager.setVN_exitCode(endCode);
+        gameManager.setVN_Script("NoScript");
         continueScript = false;
         allowContinue = false;
     }
@@ -366,7 +368,7 @@ public class VN_LogicScript : MonoBehaviour
     void move(VN_CharacterScript character, float xAxis, float speed)
     {
         character.Move(xAxis, speed);
-        scriptIndex += 4;
+        scriptIndex += 1;
     }
 
 
@@ -392,12 +394,12 @@ public class VN_LogicScript : MonoBehaviour
 
         pastDialogue[2].text = pastDialogue[1].text;
         pastDialogue[1].text = pastDialogue[0].text;
-        pastDialogue[0].text = script[scriptIndex + 2];
+        pastDialogue[0].text = script[scriptIndex , 2];
         pastName[2].text = pastName[1].text;
         pastName[1].text = pastName[0].text;
-        pastName[0].text = script[scriptIndex + 1];
+        pastName[0].text = script[scriptIndex , 1];
 
-        scriptIndex += 3;
+        scriptIndex += 1;
         continueScript = false;
         allowContinue = false;
     }
@@ -408,7 +410,7 @@ public class VN_LogicScript : MonoBehaviour
     void sound(string soundName)
     {
         soundEffectManager.GetComponent<VN_SoundLibrary>().playSound(soundName);
-        scriptIndex += 2;
+        scriptIndex += 1;
     }
 
 
