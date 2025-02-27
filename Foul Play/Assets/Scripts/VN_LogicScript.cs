@@ -10,11 +10,6 @@ using static UnityEngine.ParticleSystem;
 
 public class VN_LogicScript : MonoBehaviour
 {
-    // Allows access to main logic script
-    public GameObject mainlogicscript;
-
-
-
     // Variables used for Say
     // Used to write to the text box
     public Text textBox;
@@ -52,8 +47,6 @@ public class VN_LogicScript : MonoBehaviour
     int choice1Index;
     int choice2Index;
 
-    // Stops the script from continuing while a choice is needed
-    bool choiceTime = false;
 
 
 
@@ -121,7 +114,7 @@ public class VN_LogicScript : MonoBehaviour
         // Detects Space, Keyboard Enter, and Left Mouse
         // Will not work if other menus are open
         playerInput = false;
-        if (PreviousDialogue.activeSelf == false && !gameManager.getMain_Paused() && (UnityEngine.Input.GetKeyDown(KeyCode.Space) | UnityEngine.Input.GetKeyDown(KeyCode.Return) | UnityEngine.Input.GetMouseButtonDown(0)))
+        if (!PreviousDialogue.activeSelf && !choiceUI.activeSelf && !gameManager.getMain_Paused() && (UnityEngine.Input.GetKeyDown(KeyCode.Space) || UnityEngine.Input.GetKeyDown(KeyCode.Return) || UnityEngine.Input.GetMouseButtonDown(0)))
         {
             playerInput = true;
         }
@@ -133,7 +126,7 @@ public class VN_LogicScript : MonoBehaviour
         }
 
         // Goes through the instructions in the script
-        while (continueScript && !choiceTime && !gameManager.getMain_Paused())
+        while (continueScript && !choiceUI.activeSelf && !gameManager.getMain_Paused())
         {
             // Converts text name to array
             if (script[scriptIndex , 1] == "BG") { wantedCharacter = 0;}
@@ -208,7 +201,7 @@ public class VN_LogicScript : MonoBehaviour
 
         // Shows the previous dialogue menu when the user presses tab and they can continue
         // Hides the menu when it is open
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Tab) && !gameManager.getMain_Paused() && (allowContinue | PreviousDialogue.activeSelf))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Tab) && !gameManager.getMain_Paused() && (allowContinue || PreviousDialogue.activeSelf))
         {
             togglePreDialogue();
         }
@@ -217,7 +210,7 @@ public class VN_LogicScript : MonoBehaviour
         // increases the timer
         timer += Time.deltaTime;
         // When its been enough time the text will be added to the box
-        if (arrayTargetTextBox.Length > arrayTargetTextBoxIndex && timer >= talkSpeed && !gameManager.getMain_Paused())
+        if (arrayTargetTextBox.Length > arrayTargetTextBoxIndex && timer >= talkSpeed && (!gameManager.getMain_Paused()))
         {
             advanceDialogue();
             timer = 0;
@@ -294,9 +287,7 @@ public class VN_LogicScript : MonoBehaviour
         choice2Text.text = option2;
         choice2Index = option2Index;
 
-        choiceTime = true;
         continueScript = false;
-        allowContinue = false;
     }
 
 
@@ -305,9 +296,7 @@ public class VN_LogicScript : MonoBehaviour
     // Branches to the choice made
     public void choiceMade(int choiceNum)
     {
-        choiceTime = false;
         continueScript = true;
-        allowContinue = true;
         
         choiceUI.SetActive(false);
 
