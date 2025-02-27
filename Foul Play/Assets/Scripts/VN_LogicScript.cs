@@ -7,6 +7,7 @@ using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 using static UnityEngine.ParticleSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class VN_LogicScript : MonoBehaviour
 {
@@ -33,7 +34,8 @@ public class VN_LogicScript : MonoBehaviour
     public AudioClip talkSound;
     AudioSource audioSource;
 
-
+    // Array used for branch points
+    string[] branchPoints;
 
     // Variables used for Choice
     // Hold the canvas the choiceUI is in.
@@ -43,9 +45,9 @@ public class VN_LogicScript : MonoBehaviour
     public Text choice1Text;
     public Text choice2Text;
     
-    // Holds the indexes that each of the buttons should send the player too
-    int choice1Index;
-    int choice2Index;
+    // Holds the point that each of the buttons should send the player too
+    string choice1Point;
+    string choice2Point;
 
 
 
@@ -89,16 +91,28 @@ public class VN_LogicScript : MonoBehaviour
         // Calls calls return script from VN_Script
         // Calls the gameManager to get which script is wanted
         script = GetComponent<VN_Scripts>().returnScript(gameManager.getVN_Script());
+        branchPoints = new string[script.GetLength(0)];
 
         // Gets the audioSource to use later
         // Gets the audioSource to use later
         audioSource = GetComponent<AudioSource>();
-
+        audioSource.volume = gameManager.getMain_SoundEffectVolume();
         // Grants control over the characters
         for (int i = 0; i < CharacterObjects.Length; i++)
         {
             Characters[i] = CharacterObjects[i].GetComponent<VN_CharacterScript>();
         }
+
+
+        for (int i = 0; i < (script.GetLength(0) - 1); i++)
+        {
+            if (script[i,0] == "Branch Point")
+            {
+                branchPoints[i] = script[i, 1];
+            }
+
+        }
+
 
 
         // Makes it so dialogue will instantly start
@@ -154,7 +168,12 @@ public class VN_LogicScript : MonoBehaviour
 
             else if (script[scriptIndex , 0] == "Branch")
             {
-                branch(int.Parse(script[scriptIndex , 1]));
+                branch(script[scriptIndex , 1]);
+            }
+
+            else if (script[scriptIndex, 0] == "Branch Point")
+            {
+                branchPoint();
             }
 
             else if (script[scriptIndex , 0] == "Change")
@@ -164,7 +183,7 @@ public class VN_LogicScript : MonoBehaviour
 
             else if (script[scriptIndex , 0] == "Choice")
             {
-                choice(script[scriptIndex , 1], int.Parse(script[scriptIndex , 2]), script[scriptIndex , 3], int.Parse(script[scriptIndex , 4]));
+                choice(script[scriptIndex , 1], script[scriptIndex , 2], script[scriptIndex , 3], script[scriptIndex , 4]);
             }
 
             else if (script[scriptIndex , 0] == "Disappear")
@@ -231,7 +250,14 @@ public class VN_LogicScript : MonoBehaviour
         }
 
 
+        if (gameManager.Main_paused)
+        {
+            audioSource.volume = gameManager.getMain_SoundEffectVolume();
+        }
+
     }
+
+    
 
 
 
@@ -261,12 +287,24 @@ public class VN_LogicScript : MonoBehaviour
 
 
     // Will be used to jump to different parts of the script
-    void branch(int branchPoint)
+    void branch(string branchPoint)
     {
-        scriptIndex = branchPoint;
+        if (Array.IndexOf(branchPoints, branchPoint) != -1)
+        {
+            scriptIndex = Array.IndexOf(branchPoints, branchPoint);
+        }
+        else
+        {
+            error(false);
+            scriptIndex =  0;
+        }
+        
     }
 
-
+    void branchPoint()
+    {
+        scriptIndex += 1;
+    }
 
     // Changes the sprite of a given character
     void change(VN_CharacterScript character, int spriteNumber)
@@ -279,13 +317,13 @@ public class VN_LogicScript : MonoBehaviour
 
     // Give the user 2 choices
     // They can not continue unless they press one of them
-    void choice(string option1, int option1Index, string option2, int option2Index)
+    void choice(string option1, string option1Point, string option2, string option2Point)
     {
         choiceUI.SetActive(true);
         choice1Text.text = option1;
-        choice1Index = option1Index;
+        choice1Point = option1Point;
         choice2Text.text = option2;
-        choice2Index = option2Index;
+        choice2Point = option2Point;
 
         continueScript = false;
     }
@@ -302,12 +340,12 @@ public class VN_LogicScript : MonoBehaviour
 
         if (choiceNum == 1)
         {
-            branch(choice1Index);
+            branch(choice1Point);
         }
 
         else
         {
-            branch(choice2Index);
+            branch(choice2Point);
         }
     }
 
