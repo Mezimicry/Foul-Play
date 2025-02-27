@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: c456d1bcbd0759945a5519a737beff9f
   - enabled: 1
-    path: Assets/Scenes/Visual Novel.unity
+    path: Assets/Scenes/VIsual Novel.unity
     guid: 280bf735a1de3364a9ad76f70ae6c7a8
+  - enabled: 1
+    path: Assets/Scenes/Point and Click.unity
+    guid: 853808c88e30d3341ba16719a64507cb
   m_configObjects: {}

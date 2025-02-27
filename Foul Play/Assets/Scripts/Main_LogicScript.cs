@@ -69,7 +69,7 @@ public class Main_LogicScript : MonoBehaviour
     // Use this to test opening the point and click scene
     public void openPointAndClick()
     {
-        SceneManager.LoadScene("AddSceneNameHere", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Point and Click", LoadSceneMode.Additive);
         titleScreen.SetActive(false);
     }
 
