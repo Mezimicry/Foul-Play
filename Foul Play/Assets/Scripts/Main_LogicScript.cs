@@ -19,9 +19,12 @@ public class Main_LogicScript : MonoBehaviour
     public GameObject settingsUnpauseButton;
 
 
+    public Text volumeShower;
+    public Slider volumeSlider;
+
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -29,6 +32,13 @@ public class Main_LogicScript : MonoBehaviour
         if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
         {
             togglePausemenu();
+        }
+
+
+        if (settingsMenu.activeSelf)
+        {
+            gameManager.setMain_Volume(volumeSlider.value);
+            volumeShower.text = volumeSlider.value.ToString();
         }
     }
 
@@ -81,7 +91,6 @@ public class Main_LogicScript : MonoBehaviour
         SceneManager.LoadScene("Main");
         togglePausemenu();
     }
-
 
 
 

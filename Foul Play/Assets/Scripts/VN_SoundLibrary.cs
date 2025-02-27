@@ -15,7 +15,19 @@ public class VN_SoundLibrary : MonoBehaviour
     {
         // Sets the audio source
         audioSource = GetComponent<AudioSource>();
+        audioSource.volume = (gameManager.getMain_Volume() * 0.01f);
     }
+
+
+    void Update()
+    {
+        if (gameManager.Main_paused)
+        {
+            audioSource.volume = (gameManager.getMain_Volume() * 0.01f);
+        }
+    }
+
+
 
     // Plays the desired sound
     public void playSound(string soundName)

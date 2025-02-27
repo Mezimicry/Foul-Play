@@ -9,9 +9,11 @@ using UnityEngine.SocialPlatforms.Impl;
 public static class gameManager
 {
     public static bool Main_paused = false;
+    public static float Main_volume = 50;
     public static string VN_scriptName = "NoScript";
     public static string VN_exitCode = "NoExitCode";
     
+
 
     // For storing which script the VN should load
     public static void setVN_Script(string wantedScript)
@@ -36,6 +38,7 @@ public static class gameManager
     }
 
 
+
     // To know if the game is meant to be paused
     public static void setMain_Paused(bool paused)
     {
@@ -47,5 +50,24 @@ public static class gameManager
     }
 
 
+
+    // Used to store the volume
+    public static void setMain_Volume(float volume)
+    {
+        Main_volume = volume;
+
+        if (Main_volume > 100)
+        {
+            Main_volume = 100;
+        }
+        else if (Main_volume < 0)
+        {
+            Main_volume = 0;
+        }
+    }
+    public static float getMain_Volume()
+    {
+        return Main_volume;
+    }
 
 }

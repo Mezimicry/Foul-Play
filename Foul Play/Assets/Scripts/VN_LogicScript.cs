@@ -93,7 +93,7 @@ public class VN_LogicScript : MonoBehaviour
         // Gets the audioSource to use later
         // Gets the audioSource to use later
         audioSource = GetComponent<AudioSource>();
-
+        audioSource.volume = (gameManager.getMain_Volume() * 0.01f);
         // Grants control over the characters
         for (int i = 0; i < CharacterObjects.Length; i++)
         {
@@ -230,6 +230,11 @@ public class VN_LogicScript : MonoBehaviour
             audioSource.Play();
         }
 
+
+        if (gameManager.Main_paused)
+        {
+            audioSource.volume = (gameManager.getMain_Volume() * 0.01f);
+        }
 
     }
 
