@@ -21,6 +21,7 @@ public class VN_SoundLibrary : MonoBehaviour
 
     void Update()
     {
+        // While the game is paused it will update the volume
         if (gameManager.Main_paused)
         {
             audioSource.volume = (gameManager.getMain_SoundEffectVolume());

@@ -23,6 +23,7 @@ public class VN_CharacterScript : MonoBehaviour
 
     void Start()
     {
+        // Stores origin of the character so it can return
         origin = new Vector2(transform.position.x, transform.position.y);
     }
 
