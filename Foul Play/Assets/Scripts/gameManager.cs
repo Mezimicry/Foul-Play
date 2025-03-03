@@ -8,12 +8,21 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public static class gameManager
 {
+    // Stores if the game is paused so other scenes can stop
     public static bool Main_paused = false;
+
+    // Stores the current volume settings
     public static float Main_masterVolume = 50;
     public static float Main_musicVolume = 50;
     public static float Main_soundEffectVolume = 50;
+
+    // Stores what music should be playing
     public static string Main_wantedMusic = "Title Screen";
+
+    // Stores what script the VN should play
     public static string VN_scriptName = "NoScript";
+
+    // Stores the last VN Exit code
     public static string VN_exitCode = "NoExitCode";
     
 

@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using UnityEngine.Windows;
@@ -37,17 +39,23 @@ public class VN_LogicScript : MonoBehaviour
     // Array used for branch points
     string[] branchPoints;
 
+
+
     // Variables used for Choice
     // Hold the canvas the choiceUI is in.
     public GameObject choiceUI;
 
     // Holds the text boxes used in the buttons
-    public Text choice1Text;
-    public Text choice2Text;
-    
+    public Text sweetChoiceText;
+    public Text sadisticChoiceText;
+    public Text sassyChoiceText;
+    public Text strongChoiceText;
+
     // Holds the point that each of the buttons should send the player too
-    string choice1Point;
-    string choice2Point;
+    string sweetChoicePoint;
+    string sadisticChoicePoint;
+    string sassyChoicePoint;
+    string strongChoicePoint;
 
 
 
@@ -97,13 +105,14 @@ public class VN_LogicScript : MonoBehaviour
         // Gets the audioSource to use later
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = gameManager.getMain_SoundEffectVolume();
+
         // Grants control over the characters
         for (int i = 0; i < CharacterObjects.Length; i++)
         {
             Characters[i] = CharacterObjects[i].GetComponent<VN_CharacterScript>();
         }
 
-
+        // Checks the script for any branch points and then stores them
         for (int i = 0; i < (script.GetLength(0) - 1); i++)
         {
             if (script[i,0] == "Branch Point")
@@ -113,11 +122,8 @@ public class VN_LogicScript : MonoBehaviour
 
         }
 
-
-
         // Makes it so dialogue will instantly start
         timer = talkSpeed;
-
 
     }
 
@@ -183,7 +189,7 @@ public class VN_LogicScript : MonoBehaviour
 
             else if (script[scriptIndex , 0] == "Choice")
             {
-                choice(script[scriptIndex , 1], script[scriptIndex , 2], script[scriptIndex , 3], script[scriptIndex , 4]);
+                choice(script[scriptIndex , 1], script[scriptIndex , 2], script[scriptIndex , 3], script[scriptIndex , 4], script[scriptIndex, 5], script[scriptIndex, 6], script[scriptIndex, 7], script[scriptIndex, 8]);
             }
 
             else if (script[scriptIndex , 0] == "Disappear")
@@ -249,7 +255,7 @@ public class VN_LogicScript : MonoBehaviour
             audioSource.Play();
         }
 
-
+        // Updates volume while game is paused
         if (gameManager.Main_paused)
         {
             audioSource.volume = gameManager.getMain_SoundEffectVolume();
@@ -287,6 +293,7 @@ public class VN_LogicScript : MonoBehaviour
 
 
     // Will be used to jump to different parts of the script
+    // Looks for branch point in array and then sets script index to the same as that of the branch point
     void branch(string branchPoint)
     {
         if (Array.IndexOf(branchPoints, branchPoint) != -1)
@@ -301,10 +308,15 @@ public class VN_LogicScript : MonoBehaviour
         
     }
 
+
+
+    // Skips past the branch point
     void branchPoint()
     {
         scriptIndex += 1;
     }
+
+
 
     // Changes the sprite of a given character
     void change(VN_CharacterScript character, int spriteNumber)
@@ -315,15 +327,20 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Give the user 2 choices
+    // Give the user 4 choices
     // They can not continue unless they press one of them
-    void choice(string option1, string option1Point, string option2, string option2Point)
+    void choice(string option1, string option1Point, string option2, string option2Point, string option3, string option3Point, string option4, string option4Point)
     {
         choiceUI.SetActive(true);
-        choice1Text.text = option1;
-        choice1Point = option1Point;
-        choice2Text.text = option2;
-        choice2Point = option2Point;
+        sweetChoiceText.text = option1;
+        sadisticChoiceText.text = option2;
+        sassyChoiceText.text = option3;
+        strongChoiceText.text = option4;
+
+        sweetChoicePoint = option1Point;
+        sadisticChoicePoint = option2Point;
+        sassyChoicePoint = option3Point;
+        strongChoicePoint = option4Point;
 
         continueScript = false;
     }
@@ -340,12 +357,22 @@ public class VN_LogicScript : MonoBehaviour
 
         if (choiceNum == 1)
         {
-            branch(choice1Point);
+            branch(sweetChoicePoint);
+        }
+
+        else if (choiceNum == 2)
+        {
+            branch(sadisticChoicePoint);
+        }
+
+        else if (choiceNum == 3)
+        {
+            branch(sassyChoicePoint);
         }
 
         else
         {
-            branch(choice2Point);
+            branch(strongChoicePoint);
         }
     }
 
@@ -362,14 +389,14 @@ public class VN_LogicScript : MonoBehaviour
 
     // Prevents script from continuing
     // Passes endCode to the gameManager
-    // Needs to end or hide scene 
+    // Closes VN scene and removes the script
     void end(string endCode)
     {
-
         gameManager.setVN_exitCode(endCode);
         gameManager.setVN_Script("NoScript");
         continueScript = false;
         allowContinue = false;
+        EditorSceneManager.UnloadSceneAsync("Visual Novel");
     }
 
 
