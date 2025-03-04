@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,7 +25,7 @@ public class Main_LogicScript : MonoBehaviour
     public Text soundEffectVolumeShower;
     public Slider soundEffectVolumeSlider;
 
-
+    public Dropdown scriptDropdown;
 
     void Start()
     {
@@ -39,7 +38,7 @@ public class Main_LogicScript : MonoBehaviour
     void Update()
     {
         // Toggles pausemenu when escape is pressed
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape))
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !titleScreen.activeSelf)
         {
             togglePausemenu();
         }
@@ -67,10 +66,10 @@ public class Main_LogicScript : MonoBehaviour
     /// Used by the VN buttons to simulate the VN being opened
     /// </summary>
     /// <param name="wantedScript"></param>
-    public void openVisualNovel(string wantedScript)
+    public void openVisualNovel()
     {
         // Stores the wanted script into the game manager so the VN knows what scene is wanted
-        gameManager.setVN_Script(wantedScript);
+        gameManager.setVN_Script(scriptDropdown.options[scriptDropdown.value].text);
 
         // Sets the music
         gameManager.setMain_wantedMusic("VNTest");
@@ -145,6 +144,15 @@ public class Main_LogicScript : MonoBehaviour
         togglePausemenu();
     }
 
+
+    /// <summary>
+    /// Closes the game
+    /// </summary>
+    public void closeGame()
+    {
+        print("closing");
+        Application.Quit();
+    }
 
 
 }
