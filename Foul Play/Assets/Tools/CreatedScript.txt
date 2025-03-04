@@ -1,0 +1,8 @@
+if (scriptName == "TestScript")
+{
+string[,] script =
+{
+            {"Say", "Phox" , "This is a script done just to have the file appear", "", "", "", "", "", ""}
+            };
+return script;
+}
