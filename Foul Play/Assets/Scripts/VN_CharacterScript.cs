@@ -34,28 +34,30 @@ public class VN_CharacterScript : MonoBehaviour
         if (needToMove && !gameManager.getMain_Paused())
         {
             // Character is moved by the speed multiplied by both the time the frame took and the direction.
-            transform.position += new Vector3(targetSpeed, 0, 0) * Time.deltaTime * directionMod;
+            transform.position += new Vector3(targetSpeed, 0) * Time.deltaTime * directionMod;
 
             // When the character is at a position equal or past its destination
-            // It will get set to the destiation, have its speed set to 0, and disable the moving code
+            // It will use appear to move to that exact location
             if ((transform.position.x >= targetDesination && directionMod == 1) | (transform.position.x <= targetDesination && directionMod == -1))
             {
-                transform.position = new Vector3(targetDesination, 0, 0);
-                targetSpeed = 0;
-                needToMove = false;
+                Appear(targetDesination);
             }
         }
     }
 
-    // Instantly makes the character be in its desired location
+    // Instantly makes the character be in its desired location + gets them to stop moving
     public void Appear(float xAxis)
     {
+        targetSpeed = 0;
+        needToMove = false;
         transform.localPosition = new Vector2(xAxis, 0);
     }
 
-    // Returns the character to their origianl positon 
+    // Returns the character to their origianl positon + gets them to stop moving
     public void Disappear()
     {
+        targetSpeed = 0;
+        needToMove = false;
         transform.localPosition = origin;
     }
 

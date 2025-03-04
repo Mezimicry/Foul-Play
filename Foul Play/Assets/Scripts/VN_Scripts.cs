@@ -93,6 +93,8 @@ public class VN_Scripts : MonoBehaviour
             return testScript;
         }
 
+
+
         string[,] errorScript =
         {
             { "Say", "Phox", "The Script hasn't loaded. Oops"  , ""  , "" , "", "", "", ""},
