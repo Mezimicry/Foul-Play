@@ -30,7 +30,10 @@ public class VN_SoundLibrary : MonoBehaviour
 
 
 
-    // Plays the desired sound
+    /// <summary>
+    /// Plays the sound effect that is named
+    /// </summary>
+    /// <param name="soundName"></param>
     public void playSound(string soundName)
     {
         // Finds the sound

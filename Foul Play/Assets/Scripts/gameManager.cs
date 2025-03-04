@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine.SocialPlatforms.Impl;
 
 // The gameManager is used to pass variables between scenes.
@@ -27,11 +28,17 @@ public static class gameManager
     
 
 
-    // For storing which script the VN should load
+    /// <summary>
+    /// Stores what script the VN will open
+    /// </summary>
+    /// <param name="wantedScript"></param>
     public static void setVN_Script(string wantedScript)
     {
         VN_scriptName = wantedScript;
     }
+    /// <summary>
+    /// Gets which script the VN should load
+    /// </summary>
     public static string getVN_Script()
     {
         return VN_scriptName;
@@ -39,11 +46,17 @@ public static class gameManager
 
     
 
-    // So other scenes can know the VN exit code
+    /// <summary>
+    /// Sets the current exit code
+    /// </summary>
+    /// <param name="exitCode"></param>
     public static void setVN_exitCode(string exitCode)
     {
         VN_exitCode = exitCode;
     }
+    /// <summary>
+    /// Gets the current exit code so that other scenes can know what happened in the VN
+    /// </summary>
     public static string getVN_exitCode()
     {
         return VN_exitCode;
@@ -51,22 +64,35 @@ public static class gameManager
 
 
 
-    // Used for changing the music
+    /// <summary>
+    /// Changes what music is going to be playing
+    /// </summary>
+    /// <param name="wantedMusic"></param>
     public static void setMain_wantedMusic(string wantedMusic)
     {
         Main_wantedMusic = wantedMusic;
     }
+    /// <summary>
+    /// Used to get the currently playing music
+    /// </summary>
     public static string getMain_wantedMusic()
     {
         return Main_wantedMusic;
     }
 
 
-    // To know if the game is meant to be paused
+
+    /// <summary>
+    /// Tells the game if it is paused
+    /// </summary>
+    /// <param name="paused"></param>
     public static void setMain_Paused(bool paused)
     {
         Main_paused = paused;
     }
+    /// <summary>
+    /// Used to check if the game should be paused
+    /// </summary>
     public static bool getMain_Paused()
     {
         return Main_paused;
@@ -74,32 +100,53 @@ public static class gameManager
 
 
 
-    // Used to store the volume
+    /// <summary>
+    /// Changes the current master volume
+    /// </summary>
+    /// <param name="volume"></param>
     public static void setMain_MasterVolume(float volume)
     {
         Main_masterVolume = volume;
     }
+    /// <summary>
+    /// Gets the current master volume
+    /// </summary>
     public static float getMain_MasterVolume()
     {
         return Main_masterVolume;
     }
 
+    /// <summary>
+    /// Sets the current music volume
+    /// </summary>
+    /// <param name="volume"></param>
     public static void setMain_MusicVolume(float volume)
     {
         Main_musicVolume = volume;
     }
+    /// <summary>
+    /// Gets the current music volume
+    /// </summary>
+    /// <returns>Current music volume divided by master volume</returns>
     public static float getMain_MusicVolume()
     {
         return (Main_musicVolume / 100) * (Main_masterVolume / 100);
     }
 
+    /// <summary>
+    /// Sets the current sound effect volume
+    /// </summary>
+    /// <param name="volume"></param>
     public static void setMain_SoundEffectVolume(float volume)
     {
         Main_soundEffectVolume = volume;
     }
+    /// <summary>
+    /// Gets the current sound effect volume
+    /// </summary>
+    /// <returns>Current sound effect volume divided by master volume</returns>
     public static float getMain_SoundEffectVolume()
     {
         return (Main_soundEffectVolume / 100) * (Main_masterVolume / 100 );
     }
-
 }

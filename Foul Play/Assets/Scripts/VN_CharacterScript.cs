@@ -45,7 +45,10 @@ public class VN_CharacterScript : MonoBehaviour
         }
     }
 
-    // Instantly makes the character be in its desired location + gets them to stop moving
+    /// <summary>
+    /// Instantly makes the character be in its desired location + gets them to stop moving
+    /// </summary>
+    /// <param name="xAxis"></param>
     public void Appear(float xAxis)
     {
         targetSpeed = 0;
@@ -53,7 +56,10 @@ public class VN_CharacterScript : MonoBehaviour
         transform.localPosition = new Vector2(xAxis, 0);
     }
 
-    // Returns the character to their origianl positon + gets them to stop moving
+
+    /// <summary>
+    /// Returns the character to their original positon + gets them to stop moving
+    /// </summary>
     public void Disappear()
     {
         targetSpeed = 0;
@@ -62,7 +68,11 @@ public class VN_CharacterScript : MonoBehaviour
     }
 
 
-    // Moves the character to its desired location over time
+    /// <summary>
+    /// Moves the character to its desired location over time
+    /// </summary>
+    /// <param name="xAxis"></param>
+    /// <param name="speed"></param>
     public void Move(float xAxis, float speed)
     {
         // Sets the desination and speed
@@ -83,7 +93,10 @@ public class VN_CharacterScript : MonoBehaviour
         }
     }
 
-    // Changes the characters sprite
+    /// <summary>
+    /// Changes the characters sprite
+    /// </summary>
+    /// <param name="spriteNumber"></param>
     public void Change(int spriteNumber)
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = sprites[spriteNumber];

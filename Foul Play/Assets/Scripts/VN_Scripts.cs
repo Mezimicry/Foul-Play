@@ -57,13 +57,19 @@ public class VN_Scripts : MonoBehaviour
 
 
 
+
     // This is called along with the name of a script
     // It will then return the wanted script or an error
+    /// <summary>
+    /// Call to obtain the script that is passed into it
+    /// </summary>
+    /// <param name="scriptName"></param>
+    /// <returns>Either the wanted script or an error script</returns>
     public string[,] returnScript(string scriptName)
     {
         if (scriptName == "Test")
         {
-            string[,] testScript =
+            string[,] script =
             {
             {"Branch Point", "Start" , "", "", "", "", "", "", ""}, 
             {"Appear", "Ebony", "-5" , "", "", "", "", "", ""},
@@ -90,7 +96,7 @@ public class VN_Scripts : MonoBehaviour
             {"Say", "Ebony", "No this is much worse." , ""  , "", "", "", "", ""  },
             {"End", "Normal End"  , ""  , ""  , "", "", "", "", "" },
             };
-            return testScript;
+            return script;
         }
 
         // The start of the game when foul's true form is revealed and tells the princess about how they'll get married
@@ -131,8 +137,6 @@ public class VN_Scripts : MonoBehaviour
             };
             return script;
         }
-
-
 
 
 

@@ -62,7 +62,11 @@ public class Main_LogicScript : MonoBehaviour
 
 
 
-    // Called by the VN buttons to simulate what should be done when the point and click needs to start a VN scene
+   
+    /// <summary>
+    /// Used by the VN buttons to simulate the VN being opened
+    /// </summary>
+    /// <param name="wantedScript"></param>
     public void openVisualNovel(string wantedScript)
     {
         // Stores the wanted script into the game manager so the VN knows what scene is wanted
@@ -79,7 +83,10 @@ public class Main_LogicScript : MonoBehaviour
     }
 
 
-    // Use this to test opening the point and click scene
+
+    /// <summary>
+    /// Used to open the point and click scene
+    /// </summary>
     public void openPointAndClick()
     {
         SceneManager.LoadScene("Point and Click", LoadSceneMode.Additive);
@@ -88,7 +95,9 @@ public class Main_LogicScript : MonoBehaviour
 
 
 
-    // Toggles pausemenu
+    /// <summary>
+    /// Opens and closes the pause menu
+    /// </summary>
     public void togglePausemenu()
     {
         // Causes the pause menu active state to because the opposite of what it currently is
@@ -113,7 +122,10 @@ public class Main_LogicScript : MonoBehaviour
 
 
 
-    // Changes the settings menu to be its opposite active state
+
+    /// <summary>
+    /// Opens and closes the settings menu
+    /// </summary>
     public void toggleSettings()
     {
         settingsMenu.SetActive(!settingsMenu.activeSelf);
@@ -121,7 +133,9 @@ public class Main_LogicScript : MonoBehaviour
 
 
 
-
+    /// <summary>
+    /// Closes all other scenes and opens the title screen
+    /// </summary>
     public void returnToTitle()
     {
         // Sets the only active scene to be main

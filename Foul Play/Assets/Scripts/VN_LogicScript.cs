@@ -56,7 +56,7 @@ public class VN_LogicScript : MonoBehaviour
     string sadisticChoicePoint;
     string sassyChoicePoint;
     string strongChoicePoint;
-
+    
 
 
 
@@ -100,6 +100,7 @@ public class VN_LogicScript : MonoBehaviour
         // Calls the gameManager to get which script is wanted
         script = GetComponent<VN_Scripts>().returnScript(gameManager.getVN_Script());
         branchPoints = new string[script.GetLength(0)];
+
 
         // Gets the audioSource to use later
         // Gets the audioSource to use later
@@ -263,12 +264,13 @@ public class VN_LogicScript : MonoBehaviour
 
     }
 
-    
 
 
 
-    // Adds the next part of text to the box
-    // Also plays the talk sound
+    /// <summary>
+    /// Adds the next part of text to the box. 
+    /// Also plays the talk sound
+    /// </summary>
     void advanceDialogue()
     {
         textBox.text += (arrayTargetTextBox[arrayTargetTextBoxIndex] += " ");
@@ -280,10 +282,11 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Teleports Character
-    // First one after code is the character
-    // Second one is the location on the x axis
-    // 7 in either direction starts to go out of bounds
+    /// <summary>
+    /// Teleports Character
+    /// </summary>
+    /// <param name="Character"></param>
+    /// <param name="xAxis"></param>
     void appear(VN_CharacterScript Character, float xAxis)
     {
         Character.Appear(xAxis);
@@ -292,8 +295,10 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Will be used to jump to different parts of the script
-    // Looks for branch point in array and then sets script index to the same as that of the branch point
+    /// <summary>
+    /// Sets scriptIndex to the possition of the branch point
+    /// </summary>
+    /// <param name="branchPoint"></param>
     void branch(string branchPoint)
     {
         if (Array.IndexOf(branchPoints, branchPoint) != -1)
@@ -310,7 +315,9 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Skips past the branch point
+    /// <summary>
+    /// Skips past the branch point when the VN reaches it
+    /// </summary>
     void branchPoint()
     {
         scriptIndex += 1;
@@ -318,7 +325,11 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Changes the sprite of a given character
+    /// <summary>
+    /// Changes the sprite of a given character
+    /// </summary>
+    /// <param name="character"></param>
+    /// <param name="spriteNumber"></param>
     void change(VN_CharacterScript character, int spriteNumber)
     {
         character.Change(spriteNumber);
@@ -327,8 +338,18 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Give the user 4 choices
-    // They can not continue unless they press one of them
+    /// <summary>
+    /// Gives the user 4 choices. 
+    /// They can not continue unless they press one of them
+    /// </summary>
+    /// <param name="option1"></param>
+    /// <param name="option1Point"></param>
+    /// <param name="option2"></param>
+    /// <param name="option2Point"></param>
+    /// <param name="option3"></param>
+    /// <param name="option3Point"></param>
+    /// <param name="option4"></param>
+    /// <param name="option4Point"></param>
     void choice(string option1, string option1Point, string option2, string option2Point, string option3, string option3Point, string option4, string option4Point)
     {
         choiceUI.SetActive(true);
@@ -347,8 +368,11 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Called by the choice buttons
-    // Branches to the choice made
+    /// <summary>
+    /// Called by the choice buttons. 
+    /// Branches to the choice made
+    /// </summary>
+    /// <param name="choiceNum"></param>
     public void choiceMade(int choiceNum)
     {
         continueScript = true;
@@ -378,7 +402,10 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Moves character to origin
+    /// <summary>
+    /// Moves character to origin
+    /// </summary>
+    /// <param name="Character"></param>
     void disappear(VN_CharacterScript Character)
     {
         Character.Disappear();
@@ -387,9 +414,13 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Prevents script from continuing
-    // Passes endCode to the gameManager
-    // Closes VN scene and removes the script
+
+    /// <summary>
+    /// Prevents script from continuing. 
+    /// Passes endCode to the gameManager. 
+    /// Closes VN scene and removes the script
+    /// </summary>
+    /// <param name="endCode"></param>
     void end(string endCode)
     {
         gameManager.setVN_exitCode(endCode);
@@ -404,6 +435,11 @@ public class VN_LogicScript : MonoBehaviour
     // When a command doesn't execute properly the user is told
     // If no command executes then it will advance 1 index at a time
     // If a command executed but didn't have a target then it won't advance
+    /// <summary>
+    /// Called when an error happens. 
+    /// True / False decides if the index should advance after it
+    /// </summary>
+    /// <param name="advance"></param>
     void error(bool advance)
     {
         nameBox.text = "Phox";
@@ -423,8 +459,13 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Moves Character
-    // Give speed to change how fast it moves
+
+    /// <summary>
+    /// Moves Character at the given speed
+    /// </summary>
+    /// <param name="character"></param>
+    /// <param name="xAxis"></param>
+    /// <param name="speed"></param>
     void move(VN_CharacterScript character, float xAxis, float speed)
     {
         character.Move(xAxis, speed);
@@ -433,7 +474,9 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Opens and closes previous dialogue menu
+    /// <summary>
+    /// Opens and closes previous dialogue menu
+    /// </summary>
     void togglePreDialogue()
     {
         PreviousDialogue.SetActive(!PreviousDialogue.activeSelf);
@@ -442,8 +485,13 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Shows text + speaker
-    // Waits for next input until continues to next command
+
+    /// <summary>
+    /// Shows text and speaker. 
+    /// Waits for next input until continues to next command
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="dialogue"></param>
     void say(string name, string dialogue)
     {
         nameBox.text = name;
@@ -466,7 +514,10 @@ public class VN_LogicScript : MonoBehaviour
 
 
 
-    // Plays sound
+    /// <summary>
+    /// Plays given sound effect
+    /// </summary>
+    /// <param name="soundName"></param>
     void sound(string soundName)
     {
         soundEffectManager.GetComponent<VN_SoundLibrary>().playSound(soundName);
