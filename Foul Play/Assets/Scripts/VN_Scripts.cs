@@ -68,8 +68,6 @@ public class VN_Scripts : MonoBehaviour
             {"Branch Point", "Start" , "", "", "", "", "", "", ""}, 
             {"Appear", "Ebony", "-5" , "", "", "", "", "", ""},
             {"Appear", "Fake Foul", "5" , "", "", "", "", "", ""},
-            {"Change", "Ebony", "0" , "" , "", "", "", "", ""  },
-            {"Disappear", "King Kavi" , "" , ""  , "", "", "", "", ""  },
             {"Say", "Ebony", "Hello Foul This is a Text Box" , ""  , "", "", "", "", ""  },
             {"Move", "Ebony", "5", "3"  , "", "", "", "", "" },
             {"Move", "Fake Foul", "-5", "5"  , "", "", "", "", "" },
@@ -83,6 +81,8 @@ public class VN_Scripts : MonoBehaviour
             {"Disappear", "Fake Foul" , ""  , ""  , "" , "", "", "", "" },
             {"Appear", "King Kavi" , "-5"  , ""  , "", "", "", "", "" },
             {"Say", "Ebony", "Wait no thats not right pls go back"  , ""  , "", "", "", "", "" },
+            {"Change", "Ebony", "0" , "" , "", "", "", "", ""  },
+            {"Disappear", "King Kavi" , "" , ""  , "", "", "", "", ""  },
             {"Branch", "Start" , "", "", "", "", "", "", "" },
             {"Branch Point", "FoulBad" , "", "", "", "", "", "", ""},
             {"Disappear", "Fake Foul"  , ""  , ""  , "", "", "", "", "" },
@@ -114,12 +114,12 @@ public class VN_Scripts : MonoBehaviour
             {"Say", "Ebony" , "Well, this feast is pretty intricate... I guess I could afford to enjoy it for a bit.", "", "", "", "", "", ""},
             {"Say", "Foul" , "See! Everything's good and fine and stuff! My world domination plan is like, totally there, and we're gonna get started soon...", "", "", "", "", "", ""},
             {"Say", "Ebony" , "You'd better not be lying Foul... but I think I'll take you at your word for now.", "", "", "", "", "", ""},
-            {"End", "Don't know about marriage" , "", "", "", "", "", "", ""},
+            {"End", "Doesn't know about marriage" , "", "", "", "", "", "", ""},
             {"Branch Point", "DistractSassy" , "", "", "", "", "", "", ""},
             {"Say", "Ebony" , "Alright cut the bullshit, Foul. You don't actually have anything prepared do you? You lying cheat!", "", "", "", "", "", ""},
             {"Say", "Foul" , "Hey, hey! I never promised you that we'd take over the world! You just made that up! I may be a liar and a cheat, but this time I'm innocent!", "", "", "", "", "", ""},
             {"Say", "Ebony" , "Oh yeah... I guess that's... true... but still we should like, totally conquer the world. We can whip your army into shape, give you a bath it'll be fun!", "", "", "", "", "", ""},
-            {"End", "Don't know about marriage" , "", "", "", "", "", "", ""},
+            {"End", "Doesn't know about marriage" , "", "", "", "", "", "", ""},
             {"Branch Point", "DistractSadistic" , "", "", "", "", "", "", ""},
             {"Say", "Ebony" , "You'd better spill the beans on this plan of yours Foul. If I suspect that you're lying to me again...", "", "", "", "", "", ""},
             {"Say", "Foul" , "Hey easy on the threats, toots. I never lied about taking over the world, you just assumed that. So how's about we cool it with the attitude, yeah?", "", "", "", "", "", ""},
@@ -127,7 +127,7 @@ public class VN_Scripts : MonoBehaviour
             {"Branch", "Marriage Reveal" , "", "", "", "", "", "", ""},
             {"Branch Point", "Marriage Reveal" , "", "", "", "", "", "", ""},
             {"Say", "Foul" , "Something even better! I've arranged for us to be married in seven days time, and we'll live together forever and ever and ever in the Demon Realm! Isn't that lovely?", "", "", "", "", "", ""},
-            {"End", "Do know about marriage" , "", "", "", "", "", "", ""}
+            {"End", "Does knows about marriage" , "", "", "", "", "", "", ""}
             };
             return script;
         }
