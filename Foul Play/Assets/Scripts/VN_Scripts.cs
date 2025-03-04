@@ -6,54 +6,54 @@ public class VN_Scripts : MonoBehaviour
 {
     // Templates with explainations
 
-    // , {"Appear", "Name", "Location" , "", "", "", "", "", ""}
+    // {"Appear", "Name", "Location" , "", "", "", "", "", ""},
     // Moves the character instantly
 
-    // , {"Branch", "PointName" , "", "", "", "", "", "", ""}
+    // {"Branch", "PointName" , "", "", "", "", "", "", ""},
     // Changes location in the script
 
-    // , {"Branch Point", "PointName" , "", "", "", "", "", "", ""}
+    // {"Branch Point", "PointName" , "", "", "", "", "", "", ""},
     // Saves a name for a location to branch to
 
-    // , {"Change", "Name" , "SpriteNum" , "", "", "", "", "", ""}
+    // {"Change", "Name" , "SpriteNum" , "", "", "", "", "", ""},
     // Changes the diresired character's sprite
 
-    // , {"Choice", "SweetText", "SweetIndex", "SadisticText", "SadisticIndex", "SassyText", "SassyIndex", "StrongText", "StrongIndex"}
+    // {"Choice", "SweetText", "SweetIndex", "SadisticText", "SadisticIndex", "SassyText", "SassyIndex", "StrongText", "StrongIndex"},
     // Gives the player 2 options that will send them to different parts of the script
 
-    // , {"Disappear", "Name" , "", "", "", "", "", "", ""}
+    // {"Disappear", "Name" , "", "", "", "", "", "", ""},
     // Sends character back to origin
 
-    // , {"End", "End Code" , "", "", "", "", "", "", ""}
+    // {"End", "End Code" , "", "", "", "", "", "", ""},
     // Ends the VN segement
     // Will also pass the end code so the game knows how you did in the VN
 
-    // , {"Move", "Name" , "Location" , "Speed" , "", "", "", "", ""}
+    // {"Move", "Name" , "Location" , "Speed" , "", "", "", "", ""},
     // Moves the character over time
 
-    // , {"Say", "Name", "Text" , "", "", "", "", "", ""}
+    // {"Say", "Name", "Text" , "", "", "", "", "", ""},
     // Show dialogue
     /* Max size for say is assumed to be the same as
     Lorem ipsum odor amet, consectetuer adipiscing elit. Vulputate iaculis pellentesque efficitur et quam primis neque? Metus duis pellentesque congue sed blandit tempor aptent ac bibendum. Lobortis duis fames pretium mi fermentum. 
     If a line is longer than this then split it.
     */
 
-    // , {"Sound", "SoundName" , "", "", "", "", "", "", ""}
+    // {"Sound", "SoundName" , "", "", "", "", "", "", ""},
     // Play sound effects
 
 
     // Plain templates
 
-    // , {"Appear", "Name", "Location" , "", "", "", "", "", ""}
-    // , {"Branch", "NewScriptIndex" , "", "", "", "", "", "", ""}
-    // , {"Branch Point", "PointName" , "", "", "", "", "", "", ""}
-    // , {"Change", "Name" , "SpriteNum" , "", "", "", "", "", ""}
-    // , {"Choice", "SweetText", "SweetIndex", "SadisticText", "SadisticIndex", "SassyText", "SassyIndex", "StrongText", "StrongIndex"}
-    // , {"Disappear", "Name" , "", "", "", "", "", "", ""}
-    // , {"End", "End Code" , "", "", "", "", "", "", ""}
-    // , {"Move", "Name" , "Location" , "Speed" , "", "", "", "", ""}
-    // , {"Say", "Name", "Text" , "", "", "", "", "", ""}
-    // , {"Sound", "SoundName" , "", "", "", "", "", "", ""}
+    // {"Appear", "Name", "Location" , "", "", "", "", "", ""},
+    // {"Branch", "NewScriptIndex" , "", "", "", "", "", "", ""},
+    // {"Branch Point", "PointName" , "", "", "", "", "", "", ""},
+    // {"Change", "Name" , "SpriteNum" , "", "", "", "", "", ""},
+    // {"Choice", "SweetText", "SweetIndex", "SadisticText", "SadisticIndex", "SassyText", "SassyIndex", "StrongText", "StrongIndex"},
+    // {"Disappear", "Name" , "", "", "", "", "", "", ""},
+    // {"End", "End Code" , "", "", "", "", "", "", ""},
+    // {"Move", "Name" , "Location" , "Speed" , "", "", "", "", ""},
+    // {"Say", "Name", "Text" , "", "", "", "", "", ""},
+    // {"Sound", "SoundName" , "", "", "", "", "", "", ""},
 
 
 
