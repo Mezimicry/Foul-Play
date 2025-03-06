@@ -82,6 +82,24 @@ public class Main_LogicScript : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Used to start a new game
+    /// </summary>
+    public void newGame()
+    {
+        SceneManager.LoadScene("Point and Click", LoadSceneMode.Additive);
+        titleScreen.SetActive(false);
+    }
+
+    /// <summary>
+    /// Used to continue a saved game
+    /// </summary>
+    public void continueGame()
+    {
+        SceneManager.LoadScene("Point and Click", LoadSceneMode.Additive);
+        titleScreen.SetActive(false);
+    }
+
 
     /// <summary>
     /// Used to open the point and click scene
