@@ -13,6 +13,7 @@ public class Main_LogicScript : MonoBehaviour
     public GameObject titleScreen;
     public GameObject pauseMenu;
     public GameObject settingsMenu;
+    public GameObject cutsceneScreen;
 
     // Used so the unpause button in the settings only shows up when the game is paused
     public GameObject settingsUnpauseButton;
@@ -87,8 +88,8 @@ public class Main_LogicScript : MonoBehaviour
     /// </summary>
     public void newGame()
     {
-        SceneManager.LoadScene("Point and Click", LoadSceneMode.Additive);
-        titleScreen.SetActive(false);
+        GetComponent<Main_CutsceneManager>().playCutscene("Opening Cutscene");
+        openPointAndClick();
     }
 
     /// <summary>
@@ -96,8 +97,7 @@ public class Main_LogicScript : MonoBehaviour
     /// </summary>
     public void continueGame()
     {
-        SceneManager.LoadScene("Point and Click", LoadSceneMode.Additive);
-        titleScreen.SetActive(false);
+        openPointAndClick();
     }
 
 
@@ -117,24 +117,27 @@ public class Main_LogicScript : MonoBehaviour
     /// </summary>
     public void togglePausemenu()
     {
-        // Causes the pause menu active state to because the opposite of what it currently is
-        pauseMenu.SetActive(!pauseMenu.activeSelf);
-
-        // Sets the game to be paused or unpaused
-        gameManager.setMain_Paused(pauseMenu.activeSelf);
-
-        // If the menu is now closed it should close the settings menu and hide the unpause button
-        if (!pauseMenu.activeSelf) 
+        // Doesn't allow to pause when a cutscene is playing
+        if (cutsceneScreen.activeSelf == false)
         {
-            settingsMenu.SetActive(false);
-            settingsUnpauseButton.SetActive(false);
-        }
-        // If the menu is now open it allows the Unpause buttons to be in the settings menu
-        else
-        {
-            settingsUnpauseButton.SetActive(true);
-        }
+            // Causes the pause menu active state to because the opposite of what it currently is
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
 
+            // Sets the game to be paused or unpaused
+            gameManager.setMain_Paused(pauseMenu.activeSelf);
+
+            // If the menu is now closed it should close the settings menu and hide the unpause button
+            if (!pauseMenu.activeSelf)
+            {
+                settingsMenu.SetActive(false);
+                settingsUnpauseButton.SetActive(false);
+            }
+            // If the menu is now open it allows the Unpause buttons to be in the settings menu
+            else
+            {
+                settingsUnpauseButton.SetActive(true);
+            }
+        }
     }
 
 
@@ -171,6 +174,18 @@ public class Main_LogicScript : MonoBehaviour
         print("closing");
         Application.Quit();
     }
+
+
+
+    /// <summary>
+    /// Used when a cutscene ends so the game knows what to do
+    /// </summary>
+    /// <param name="endedCutscene"></param>
+    public void cutsceneEnded(string endedCutscene)
+    {
+        
+    }
+
 
 
 }
