@@ -25,7 +25,10 @@ public static class gameManager
 
     // Stores the last VN Exit code
     public static string VN_exitCode = "NoExitCode";
-    
+
+    // If true then the exit code has changed and the VN has ended
+    // When gotten as true it will then be set as false
+    public static bool VN_checkExitCode = false;
 
 
     /// <summary>
@@ -60,6 +63,23 @@ public static class gameManager
     public static string getVN_exitCode()
     {
         return VN_exitCode;
+    }
+
+    public static void setVN_checkExitCode(bool checkExitCode)
+    {
+        VN_checkExitCode = checkExitCode;
+    }
+    /// <summary>
+    /// Gets the current exit code so that other scenes can know what happened in the VN
+    /// </summary>
+    public static bool getVN_checkExitCode()
+    {
+        if (VN_checkExitCode == true)
+        {
+            VN_checkExitCode = false;
+            return true;
+        }
+        return false;
     }
 
 

@@ -421,6 +421,7 @@ public class VN_LogicScript : MonoBehaviour
     {
         gameManager.setVN_exitCode(endCode);
         gameManager.setVN_Script("NoScript");
+        gameManager.setVN_checkExitCode(true);
         continueScript = false;
         allowContinue = false;
         SceneManager.UnloadSceneAsync("Visual Novel");
