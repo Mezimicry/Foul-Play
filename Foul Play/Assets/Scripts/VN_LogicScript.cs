@@ -155,14 +155,11 @@ public class VN_LogicScript : MonoBehaviour
             else if (script[scriptIndex , 1] == "King Kavi") { wantedCharacter = 2; }
             else if (script[scriptIndex , 1] == "Fake Foul") { wantedCharacter = 3; }
             else if (script[scriptIndex , 1] == "Foul") { wantedCharacter = 4; }
-            else if (script[scriptIndex , 1] == "Chimera") { wantedCharacter = 5; }
-            else if (script[scriptIndex , 1] == "Ushabti") { wantedCharacter = 6; }
-            else if (script[scriptIndex , 1] == "Wendigo") { wantedCharacter = 7; }
-            else if (script[scriptIndex , 1] == "Alerion") { wantedCharacter = 8; }
-            else if (script[scriptIndex , 1] == "Basil") { wantedCharacter = 9; }
-            else if (script[scriptIndex , 1] == "Hydra") { wantedCharacter = 10; }
-            else if (script[scriptIndex , 1] == "Tsuchigumo") { wantedCharacter = 11; }
-            else if (script[scriptIndex , 1] == "Vetala") { wantedCharacter = 12; }
+            else if (script[scriptIndex , 1] == "Clayton") { wantedCharacter = 5; }
+            else if (script[scriptIndex , 1] == "Basil") { wantedCharacter = 6; }
+            else if (script[scriptIndex , 1] == "Hydra") { wantedCharacter = 7; }
+            else if (script[scriptIndex , 1] == "Ögumo") { wantedCharacter = 8; }
+            else if (script[scriptIndex, 1] == "Fake Foul's Guard") { wantedCharacter = 9; }
             else { wantedCharacter = 0; }
 
 
