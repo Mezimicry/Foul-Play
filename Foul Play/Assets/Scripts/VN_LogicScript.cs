@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.SceneManagement;
-//using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
@@ -424,7 +423,7 @@ public class VN_LogicScript : MonoBehaviour
         gameManager.setVN_Script("NoScript");
         continueScript = false;
         allowContinue = false;
-        EditorSceneManager.UnloadSceneAsync("Visual Novel");
+        SceneManager.UnloadSceneAsync("Visual Novel");
     }
 
 
