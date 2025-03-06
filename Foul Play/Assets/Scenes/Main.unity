@@ -1439,6 +1439,7 @@ MonoBehaviour:
   titleScreen: {fileID: 2118186019}
   pauseMenu: {fileID: 1070572587}
   settingsMenu: {fileID: 498528233}
+  cutsceneScreen: {fileID: 2139272083}
   settingsUnpauseButton: {fileID: 1281224245}
   masterVolumeShower: {fileID: 383391546}
   masterVolumeSlider: {fileID: 1068834320}
@@ -1584,8 +1585,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ef2f8d5c49701439871873bec4d76d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openingScene: {fileID: 32900000, guid: 4a7131e84d13fcd45a187a1a78510b70, type: 3}
-  cutsceneScreen: {fileID: 0}
+  openingScene: {fileID: 32900000, guid: 7590c378b5023b447a6046a3eb7ca020, type: 3}
+  cutsceneScreen: {fileID: 2139272083}
 --- !u!1 &623647561
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,7 +2038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0325, y: 0.21153829}
   m_AnchorMax: {x: 0.2325, y: 0.27931857}
-  m_AnchoredPosition: {x: 0, y: -0.9000244}
+  m_AnchoredPosition: {x: 0, y: -0.90000916}
   m_SizeDelta: {x: 0, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &677976067
@@ -4082,7 +4083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -294, y: -165.4}
+  m_AnchoredPosition: {x: -294, y: -172.85}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1240197147
@@ -6517,7 +6518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2139272084
 RectTransform:
   m_ObjectHideFlags: 0

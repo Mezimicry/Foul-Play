@@ -65,12 +65,17 @@ public static class gameManager
         return VN_exitCode;
     }
 
+    /// <summary>
+    /// Tells the point and click that it should check the exit code as it should have changed
+    /// </summary>
+    /// <param name="checkExitCode"></param>
     public static void setVN_checkExitCode(bool checkExitCode)
     {
         VN_checkExitCode = checkExitCode;
     }
+
     /// <summary>
-    /// Gets the current exit code so that other scenes can know what happened in the VN
+    /// Gets the current exit code and changes it to false
     /// </summary>
     public static bool getVN_checkExitCode()
     {
@@ -79,7 +84,10 @@ public static class gameManager
             VN_checkExitCode = false;
             return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
 

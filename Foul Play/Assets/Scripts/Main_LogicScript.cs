@@ -73,7 +73,7 @@ public class Main_LogicScript : MonoBehaviour
         gameManager.setVN_Script(scriptDropdown.options[scriptDropdown.value].text);
 
         // Sets the music
-        gameManager.setMain_wantedMusic("VNTest");
+        gameManager.setMain_wantedMusic("Opening Music");
 
         // Loads the scene
         SceneManager.LoadScene("Visual Novel", LoadSceneMode.Additive);
@@ -183,7 +183,8 @@ public class Main_LogicScript : MonoBehaviour
     /// <param name="endedCutscene"></param>
     public void cutsceneEnded(string endedCutscene)
     {
-        
+        // Changes the music after the opening cutscene to the opening music
+        if (endedCutscene == "Opening Cutscene"){ gameManager.setMain_wantedMusic("Opening Music" ); }
     }
 
 
