@@ -11,6 +11,8 @@ public class Main_CutsceneManager : MonoBehaviour
     VideoPlayer videoPlayer;
     public GameObject cutsceneScreen;
 
+    public GameObject skipCutsceneBox;
+
     string currentCutscene;
 
     // Start is called before the first frame update
@@ -23,7 +25,9 @@ public class Main_CutsceneManager : MonoBehaviour
         // Makes it so at the end of the loop EndReached will be called
         videoPlayer.loopPointReached += EndReached;
 
-        
+        skipCutsceneBox = GetComponent<Main_LogicScript>().skipCutsceneBox;
+
+
     }
 
     // Update is called once per frame
@@ -61,6 +65,13 @@ public class Main_CutsceneManager : MonoBehaviour
     /// <param name="vp"></param>
     void EndReached(UnityEngine.Video.VideoPlayer vp)
     {
+        closeCutscene();
+
+
+    }
+
+    void closeCutscene()
+    {
         // Tells music to continue
         GetComponent<Main_MusicLibrary>().playMusic(true);
 
@@ -72,8 +83,31 @@ public class Main_CutsceneManager : MonoBehaviour
 
         // Unpauses the game
         gameManager.setMain_Paused(false);
-
-
     }
+
+
+    public void toggleCutscenePausemenu()
+    {
+        skipCutsceneBox.SetActive(!skipCutsceneBox.activeSelf);
+        if (skipCutsceneBox.activeSelf)
+        {
+            videoPlayer.Pause();
+        }
+        else
+        {
+            videoPlayer.Play();
+        }
+        
+    }
+
+
+    public void endCutsceneEarly()
+    {
+        videoPlayer.Stop();
+        skipCutsceneBox.SetActive(false);
+        closeCutscene();
+    }
+
+
 
 }

@@ -14,6 +14,8 @@ public class Main_LogicScript : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingsMenu;
     public GameObject cutsceneScreen;
+    public GameObject continueMenu;
+    public GameObject skipCutsceneBox;
 
     // Used so the unpause button in the settings only shows up when the game is paused
     public GameObject settingsUnpauseButton;
@@ -39,10 +41,15 @@ public class Main_LogicScript : MonoBehaviour
     void Update()
     {
         // Toggles pausemenu when escape is pressed
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !titleScreen.activeSelf)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && !titleScreen.activeSelf && !cutsceneScreen.activeSelf)
         {
             togglePausemenu();
         }
+        else if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) && cutsceneScreen.activeSelf)
+        {
+            GetComponent<Main_CutsceneManager>().toggleCutscenePausemenu();
+        }
+
 
         
 
@@ -58,6 +65,12 @@ public class Main_LogicScript : MonoBehaviour
             gameManager.setMain_SoundEffectVolume(soundEffectVolumeSlider.value);
             soundEffectVolumeShower.text = soundEffectVolumeSlider.value.ToString();
         }
+
+
+
+        
+
+
     }
 
 
@@ -88,16 +101,18 @@ public class Main_LogicScript : MonoBehaviour
     /// </summary>
     public void newGame()
     {
+        titleScreen.SetActive(false);
         GetComponent<Main_CutsceneManager>().playCutscene("Opening Cutscene");
-        openPointAndClick();
     }
 
     /// <summary>
-    /// Used to continue a saved game
+    /// Used to continue a saved game or start a new one
     /// </summary>
     public void continueGame()
     {
-        openPointAndClick();
+        SceneManager.LoadScene("Point and Click", LoadSceneMode.Additive);
+        titleScreen.SetActive(false);
+        continueMenu.SetActive(false);
     }
 
 
@@ -117,27 +132,24 @@ public class Main_LogicScript : MonoBehaviour
     /// </summary>
     public void togglePausemenu()
     {
-        // Doesn't allow to pause when a cutscene is playing
-        if (cutsceneScreen.activeSelf == false)
+        // Causes the pause menu active state to because the opposite of what it currently is
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+
+        // Sets the game to be paused or unpaused
+        gameManager.setMain_Paused(pauseMenu.activeSelf);
+
+        // If the menu is now closed it should close the settings menu and hide the unpause button
+        if (!pauseMenu.activeSelf)
         {
-            // Causes the pause menu active state to because the opposite of what it currently is
-            pauseMenu.SetActive(!pauseMenu.activeSelf);
-
-            // Sets the game to be paused or unpaused
-            gameManager.setMain_Paused(pauseMenu.activeSelf);
-
-            // If the menu is now closed it should close the settings menu and hide the unpause button
-            if (!pauseMenu.activeSelf)
-            {
-                settingsMenu.SetActive(false);
-                settingsUnpauseButton.SetActive(false);
-            }
-            // If the menu is now open it allows the Unpause buttons to be in the settings menu
-            else
-            {
-                settingsUnpauseButton.SetActive(true);
-            }
+            settingsMenu.SetActive(false);
+            settingsUnpauseButton.SetActive(false);
         }
+        // If the menu is now open it allows the Unpause buttons to be in the settings menu
+        else
+        {
+            settingsUnpauseButton.SetActive(true);
+        }
+        
     }
 
 
@@ -149,6 +161,14 @@ public class Main_LogicScript : MonoBehaviour
     public void toggleSettings()
     {
         settingsMenu.SetActive(!settingsMenu.activeSelf);
+    }
+
+
+
+    public void toggleContinue()
+    {
+        continueMenu.SetActive(!continueMenu.activeSelf);
+        titleScreen.SetActive(!continueMenu.activeSelf);
     }
 
 
@@ -171,7 +191,6 @@ public class Main_LogicScript : MonoBehaviour
     /// </summary>
     public void closeGame()
     {
-        print("closing");
         Application.Quit();
     }
 
@@ -184,8 +203,11 @@ public class Main_LogicScript : MonoBehaviour
     public void cutsceneEnded(string endedCutscene)
     {
         // Changes the music after the opening cutscene to the opening music
-        if (endedCutscene == "Opening Cutscene"){ gameManager.setMain_wantedMusic("Opening Music" ); }
+        if (endedCutscene == "Opening Cutscene"){ continueGame(); }
     }
+
+
+    
 
 
 
