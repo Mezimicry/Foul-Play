@@ -30,8 +30,36 @@ public class Main_LogicScript : MonoBehaviour
 
     public Dropdown scriptDropdown;
 
+
+    // Save Data
+    public Text currentSaveDebug;
+    public InputField changeSaveDataDebug;
+    public Dropdown currentSaveDropdownTemp;
+    int saveSlot;
+
+    gameManager.saveData[] playerSaves;
+
     void Start()
     {
+        // Loads save data
+        loadPrefs();
+
+        // Sets sliders to correct locations
+        masterVolumeSlider.value = gameManager.getMain_MasterVolume();
+        musicVolumeSlider.value = gameManager.getMain_TrueMusicVolume();
+        soundEffectVolumeSlider.value = gameManager.getMain_TrueSoundEffectVolume();
+
+
+        // Creates an array of the save data
+        playerSaves = new gameManager.saveData[3];
+        playerSaves[0] = new gameManager.saveData();
+        playerSaves[1] = new gameManager.saveData();
+        playerSaves[2] = new gameManager.saveData();
+
+        playerSaves[0].aRandomString = "One";
+        playerSaves[1].aRandomString = "Two";
+        playerSaves[2].aRandomString = "Three";
+
         // Sets current title music to the title screen music
         gameManager.setMain_wantedMusic("Title Screen");
     }
@@ -51,6 +79,9 @@ public class Main_LogicScript : MonoBehaviour
         }
 
 
+        saveSlot = currentSaveDropdownTemp.value;
+
+        currentSaveDebug.text = playerSaves[saveSlot].aRandomString;
         
 
         // Updates volume settings when settings menu is open
@@ -73,9 +104,15 @@ public class Main_LogicScript : MonoBehaviour
 
     }
 
+    public void saveData()
+    {
+        playerSaves[saveSlot].aRandomString = changeSaveDataDebug.text;
+    }
 
 
-   
+
+
+
     /// <summary>
     /// Used by the VN buttons to simulate the VN being opened
     /// </summary>
@@ -106,9 +143,15 @@ public class Main_LogicScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Used to continue a saved game or start a new one
+    /// Used to continue a saved game then starts the game
     /// </summary>
     public void continueGame()
+    {
+        gameManager.setSaveData(playerSaves[saveSlot]);
+        startGame();
+    }
+
+    public void startGame()
     {
         SceneManager.LoadScene("Point and Click", LoadSceneMode.Additive);
         titleScreen.SetActive(false);
@@ -141,8 +184,12 @@ public class Main_LogicScript : MonoBehaviour
         // If the menu is now closed it should close the settings menu and hide the unpause button
         if (!pauseMenu.activeSelf)
         {
-            settingsMenu.SetActive(false);
             settingsUnpauseButton.SetActive(false);
+
+            if (settingsMenu.activeSelf)
+            {
+                toggleSettings();
+            }
         }
         // If the menu is now open it allows the Unpause buttons to be in the settings menu
         else
@@ -153,6 +200,27 @@ public class Main_LogicScript : MonoBehaviour
     }
 
 
+    public void savePrefs()
+
+    {
+
+        PlayerPrefs.SetFloat("Master Volume", gameManager.getMain_MasterVolume());
+        PlayerPrefs.SetFloat("Music Volume", gameManager.getMain_TrueMusicVolume());
+        PlayerPrefs.SetFloat("Sound Effect Volume", gameManager.getMain_TrueSoundEffectVolume());
+        PlayerPrefs.Save();
+
+    }
+    public void loadPrefs()
+
+    {
+
+        gameManager.setMain_MasterVolume( PlayerPrefs.GetFloat("Master Volume", 50));
+        gameManager.setMain_MusicVolume(PlayerPrefs.GetFloat("Music Volume", 50));
+        gameManager.setMain_SoundEffectVolume(PlayerPrefs.GetFloat("Sound Effect Volume", 50));
+
+
+    }
+
 
 
     /// <summary>
@@ -161,6 +229,11 @@ public class Main_LogicScript : MonoBehaviour
     public void toggleSettings()
     {
         settingsMenu.SetActive(!settingsMenu.activeSelf);
+
+        if (!settingsMenu.activeSelf)
+        {
+            savePrefs();
+        }
     }
 
 
@@ -203,7 +276,10 @@ public class Main_LogicScript : MonoBehaviour
     public void cutsceneEnded(string endedCutscene)
     {
         // Changes the music after the opening cutscene to the opening music
-        if (endedCutscene == "Opening Cutscene"){ continueGame(); }
+        if (endedCutscene == "Opening Cutscene")
+        {
+            startGame();
+        }
     }
 
 

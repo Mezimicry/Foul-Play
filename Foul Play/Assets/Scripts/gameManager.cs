@@ -32,6 +32,28 @@ public static class gameManager
 
 
     /// <summary>
+    /// Save data class
+    /// </summary>
+    public class saveData
+    {
+        public string aRandomString = "DefaultValue";
+    }
+
+
+    public static saveData main_CurrentGameSave;
+
+    public static void setSaveData(saveData wantedSave)
+    {
+        main_CurrentGameSave = wantedSave;
+    }
+
+    public static saveData getSaveData()
+    {
+        return main_CurrentGameSave;
+    }
+
+
+    /// <summary>
     /// Stores what script the VN will open
     /// </summary>
     /// <param name="wantedScript"></param>
@@ -153,12 +175,20 @@ public static class gameManager
         Main_musicVolume = volume;
     }
     /// <summary>
-    /// Gets the current music volume
+    /// Gets the current music volume for sound use
     /// </summary>
     /// <returns>Current music volume divided by master volume</returns>
     public static float getMain_MusicVolume()
     {
         return (Main_musicVolume / 100) * (Main_masterVolume / 100);
+    }
+    /// <summary>
+    /// Gets the current music volume for saving
+    /// </summary>
+    /// <returns></returns>
+    public static float getMain_TrueMusicVolume()
+    {
+        return Main_musicVolume;
     }
 
     /// <summary>
@@ -176,5 +206,13 @@ public static class gameManager
     public static float getMain_SoundEffectVolume()
     {
         return (Main_soundEffectVolume / 100) * (Main_masterVolume / 100 );
+    }
+    /// <summary>
+    /// Gets the current sound effect volume for saving
+    /// </summary>
+    /// <returns></returns>
+    public static float getMain_TrueSoundEffectVolume()
+    {
+        return Main_soundEffectVolume;
     }
 }

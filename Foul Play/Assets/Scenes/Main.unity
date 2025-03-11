@@ -1445,7 +1445,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 374093990}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 599242961}
+        m_TargetAssemblyTypeName: Main_LogicScript, Assembly-CSharp
+        m_MethodName: saveData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &374093990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2363,6 +2375,9 @@ MonoBehaviour:
   soundEffectVolumeShower: {fileID: 1595328092}
   soundEffectVolumeSlider: {fileID: 879712314}
   scriptDropdown: {fileID: 2008577759}
+  currentSaveDebug: {fileID: 318716962}
+  changeSaveDataDebug: {fileID: 41966905}
+  currentSaveDropdownTemp: {fileID: 1656071341}
 --- !u!4 &599242962
 Transform:
   m_ObjectHideFlags: 0
