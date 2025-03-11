@@ -204,7 +204,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 12470546}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 599242961}
+        m_TargetAssemblyTypeName: Main_LogicScript, Assembly-CSharp
+        m_MethodName: continueGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &12470546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2341,7 +2353,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 1070572587}
   settingsMenu: {fileID: 498528233}
   cutsceneScreen: {fileID: 2139272083}
-  continueMenu: {fileID: 0}
+  continueMenu: {fileID: 1632751482}
+  skipCutsceneBox: {fileID: 113281090}
   settingsUnpauseButton: {fileID: 1281224245}
   masterVolumeShower: {fileID: 383391546}
   masterVolumeSlider: {fileID: 1068834320}
@@ -2489,6 +2502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openingScene: {fileID: 32900000, guid: 7590c378b5023b447a6046a3eb7ca020, type: 3}
   cutsceneScreen: {fileID: 2139272083}
+  skipCutsceneBox: {fileID: 0}
 --- !u!1 &623647561
 GameObject:
   m_ObjectHideFlags: 0
@@ -4492,7 +4506,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1060327238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 599242965}
+        m_TargetAssemblyTypeName: Main_CutsceneManager, Assembly-CSharp
+        m_MethodName: toggleCutscenePausemenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1060327238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7750,7 +7776,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1721197081}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 599242965}
+        m_TargetAssemblyTypeName: Main_CutsceneManager, Assembly-CSharp
+        m_MethodName: endCutsceneEarly
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1721197081
 MonoBehaviour:
   m_ObjectHideFlags: 0
