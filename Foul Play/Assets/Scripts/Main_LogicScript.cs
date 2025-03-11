@@ -56,9 +56,9 @@ public class Main_LogicScript : MonoBehaviour
         playerSaves[1] = new gameManager.saveData();
         playerSaves[2] = new gameManager.saveData();
 
-        playerSaves[0].aRandomString = "One";
-        playerSaves[1].aRandomString = "Two";
-        playerSaves[2].aRandomString = "Three";
+        playerSaves[0].saveName = "One";
+        playerSaves[1].saveName = "Two";
+        playerSaves[2].saveName = "Three";
 
         // Sets current title music to the title screen music
         gameManager.setMain_wantedMusic("Title Screen");
@@ -81,7 +81,7 @@ public class Main_LogicScript : MonoBehaviour
 
         saveSlot = currentSaveDropdownTemp.value;
 
-        currentSaveDebug.text = playerSaves[saveSlot].aRandomString;
+        currentSaveDebug.text = playerSaves[saveSlot].saveName;
         
 
         // Updates volume settings when settings menu is open
@@ -106,7 +106,7 @@ public class Main_LogicScript : MonoBehaviour
 
     public void saveData()
     {
-        playerSaves[saveSlot].aRandomString = changeSaveDataDebug.text;
+        playerSaves[saveSlot].saveName = changeSaveDataDebug.text;
     }
 
 

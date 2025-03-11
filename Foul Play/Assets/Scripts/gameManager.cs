@@ -36,20 +36,47 @@ public static class gameManager
     /// </summary>
     public class saveData
     {
-        public string aRandomString = "DefaultValue";
+        public string saveName = "Empty";
     }
 
 
     public static saveData main_CurrentGameSave;
 
+    /// <summary>
+    /// Used when loading a save from the save slots
+    /// </summary>
+    /// <param name="wantedSave"></param>
     public static void setSaveData(saveData wantedSave)
     {
         main_CurrentGameSave = wantedSave;
     }
 
+    /// <summary>
+    /// Used when saving the game to the save slots
+    /// </summary>
+    /// <returns>The currently used save</returns>
     public static saveData getSaveData()
     {
         return main_CurrentGameSave;
+    }
+
+
+    /// <summary>
+    /// Used when loading a save from the save slots
+    /// </summary>
+    /// <param name="wantedSave"></param>
+    public static void setSaveName(string wantedName)
+    {
+        main_CurrentGameSave.saveName = wantedName;
+    }
+
+    /// <summary>
+    /// Used when saving the game to the save slots
+    /// </summary>
+    /// <returns></returns>
+    public static string getSaveName()
+    {
+        return main_CurrentGameSave.saveName;
     }
 
 
