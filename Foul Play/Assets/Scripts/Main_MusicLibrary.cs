@@ -10,7 +10,7 @@ public class Main_MusicLibrary : MonoBehaviour
 
     // Each of these hold a different music track that should be played.
     public AudioClip titleScreenMusic;
-    public AudioClip VNTest;
+    public AudioClip song6InsideTheCastle;
 
     string currentlyPlayingMusic;
     string wantedMusic;
@@ -39,7 +39,7 @@ public class Main_MusicLibrary : MonoBehaviour
 
             // Finds the wanted music
             if (wantedMusic == "Title Screen") { audioSource.clip = titleScreenMusic; }
-            else if (wantedMusic == "VNTest") { audioSource.clip = VNTest; }
+            else if (wantedMusic == "Inside The Castle") { audioSource.clip = song6InsideTheCastle; }
 
             // Then plays changes what one is playing
             audioSource.Play();
@@ -49,6 +49,22 @@ public class Main_MusicLibrary : MonoBehaviour
         }
 
 
+    }
+
+    /// <summary>
+    /// If true music will contine. If false music will pause.
+    /// </summary>
+    /// <param name="play"></param>
+    public void playMusic(bool play)
+    {
+        if (play)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.Pause();
+        }
     }
 
 

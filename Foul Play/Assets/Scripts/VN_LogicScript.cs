@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.Windows;
 using static UnityEngine.ParticleSystem;
 using static UnityEngine.Rendering.DebugUI;
+using Unity.VisualScripting;
 
 public class VN_LogicScript : MonoBehaviour
 {
@@ -28,8 +29,8 @@ public class VN_LogicScript : MonoBehaviour
 
     // Used for the past dialogue screen
     public GameObject PreviousDialogue;
-    public Text[] pastDialogue;
-    public Text[] pastName;
+    public GameObject[] dialogueShowers;
+
 
     // Used to the blips when talking
     public AudioClip talkSound;
@@ -100,7 +101,6 @@ public class VN_LogicScript : MonoBehaviour
         script = GetComponent<VN_Scripts>().returnScript(gameManager.getVN_Script());
         branchPoints = new string[script.GetLength(0)];
 
-
         // Gets the audioSource to use later
         // Gets the audioSource to use later
         audioSource = GetComponent<AudioSource>();
@@ -121,6 +121,7 @@ public class VN_LogicScript : MonoBehaviour
             }
 
         }
+
 
         // Makes it so dialogue will instantly start
         timer = talkSpeed;
@@ -214,6 +215,11 @@ public class VN_LogicScript : MonoBehaviour
                 sound(script[scriptIndex , 1]);
             }
 
+            else if (script[scriptIndex, 0] == "Affinity")
+            {
+                affinity(wantedCharacter, int.Parse(script[scriptIndex, 2]));
+            }
+
             else
             {
                 error(true);
@@ -275,6 +281,19 @@ public class VN_LogicScript : MonoBehaviour
         audioSource.Play();
         arrayTargetTextBoxIndex += 1;
     }
+
+
+    /// <summary>
+    /// Changes the charater's affinity. Need to add visual
+    /// </summary>
+    /// <param name="Character"></param>
+    /// <param name="value"></param>
+    void affinity(int Character, int value)
+    {
+        gameManager.setAffinity(Character, gameManager.getAffinity(Character) + value);
+        scriptIndex += 1;
+    }
+
 
 
 
@@ -497,12 +516,19 @@ public class VN_LogicScript : MonoBehaviour
         textBox.text = "";
         arrayTargetTextBoxIndex = 0;
 
-        pastDialogue[2].text = pastDialogue[1].text;
-        pastDialogue[1].text = pastDialogue[0].text;
-        pastDialogue[0].text = script[scriptIndex , 2];
-        pastName[2].text = pastName[1].text;
-        pastName[1].text = pastName[0].text;
-        pastName[0].text = script[scriptIndex , 1];
+
+        // Goes through all of the preTextBoxes and moves each value up 1
+
+
+        for (int i = 0; i < (dialogueShowers.Length - 1); i++)
+        {
+            dialogueShowers[i].GetComponentsInChildren<Text>()[0].text = dialogueShowers[i + 1].GetComponentsInChildren<Text>()[0].text;
+            dialogueShowers[i].GetComponentsInChildren<Text>()[1].text = dialogueShowers[i + 1].GetComponentsInChildren<Text>()[1].text;
+        }
+        // Changes the last one to be the new line
+        dialogueShowers[dialogueShowers.Length - 1].GetComponentsInChildren<Text>()[0].text = script[scriptIndex, 1];
+        dialogueShowers[dialogueShowers.Length - 1].GetComponentsInChildren<Text>()[1].text = script[scriptIndex, 2];
+
 
         scriptIndex += 1;
         continueScript = false;

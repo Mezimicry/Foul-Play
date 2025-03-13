@@ -70,16 +70,17 @@ file = open("CreatedScript.txt", "w")
 
 while (continueMaking):
     print("Choose which instruction you want")
-    print("1. Appear")
-    print("2. Branch")
-    print("3. Branch Point")
-    print("4. Change")
-    print("5. Choice")
-    print("6. Disappear")
-    print("7. End")
-    print("8. Move")
-    print("9. Say")
-    print("10. Sound")
+    print("1. Affinity")
+    print("2. Appear")
+    print("3. Branch")
+    print("4. Branch Point")
+    print("5. Change")
+    print("6. Choice")
+    print("7. Disappear")
+    print("8. End")
+    print("9. Move")
+    print("10. Say")
+    print("11. Sound")
     print("101. Delete Prev Commands")
     print("999. End Program")
     wantedInstruction = int(input())
@@ -95,32 +96,39 @@ while (continueMaking):
         del script[-1]
 
     elif (wantedInstruction == 1):
+        print("Affinity")
+        character = findCharacter()
+        affinityChange = input("How much should the affinity change: ")
+        newScriptLine = "{\"Affinity\", \""+ character + "\" , \""+ affinityChange + "\", \"\", \"\", \"\", \"\", \"\", \"\"}"
+        script.append(newScriptLine)
+
+    elif (wantedInstruction == 2):
         print("Appear")
         character = findCharacter()
         location = input("Where should the character go: ")
         newScriptLine = "{\"Appear\", \""+ character + "\" , \""+ location + "\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 2):
+    elif (wantedInstruction == 3):
         print("Branch")
         wantedIndex = input("Enter Branch Point to branch to: ")
         newScriptLine = "{\"Branch\", \""+ wantedIndex + "\" , \"\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 3):
+    elif (wantedInstruction == 4):
         print("Branch Point")
         wantedIndex = input("Enter Branch Point Name: ")
         newScriptLine = "{\"Branch Point\", \""+ wantedIndex + "\" , \"\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 4):
+    elif (wantedInstruction == 5):
         print("Change")
         character = findCharacter()
         spriteNum = input("Choose sprite number: ")
         newScriptLine = "{\"Change\", \""+ character + "\" , \""+ spriteNum + "\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 5):
+    elif (wantedInstruction == 6):
         print("Choice")
         choiceText1 = input("Choose sweet choice text: ")
         wantedIndex = input("Choose branch point for sweet choice to branch to: ")
@@ -133,18 +141,18 @@ while (continueMaking):
         newScriptLine = "{\"Choice\", \"" + choiceText1 + "\" , \"" + wantedIndex + "\", \"" + choiceText2 + "\", \"" + wantedIndex2 + "\", \"" + choiceText3 + "\" , \"" + wantedIndex3 + "\", \"" + choiceText4 + "\", \"" + wantedIndex4 + "\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 6):
+    elif (wantedInstruction == 7):
         print("Disappear")
         character = findCharacter()
         newScriptLine = "{\"Disappear\", \"" + character + "\" , \"\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 7):
+    elif (wantedInstruction == 8):
         exitCode = input("Choose exit code: ")
         newScriptLine = "{\"End\", \"" + exitCode + "\" , \"\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 8):
+    elif (wantedInstruction == 9):
         print("Move")
         character = findCharacter()
         location = input("Choose location: ")
@@ -152,14 +160,14 @@ while (continueMaking):
         newScriptLine = "{\"Move\", \"" + character + "\" , \"" + location + "\", \"" + speed + "\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 9):
+    elif (wantedInstruction == 10):
         print("Say")
         name = input("Choose name: ")
         dialogue = input("Write dialogue: ")
         newScriptLine = "{\"Say\", \"" + name + "\" , \"" + dialogue + "\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 10):
+    elif (wantedInstruction == 11):
         print("Sound")
         sound = input("Choose sound: ")
         newScriptLine = "{\"Sound\", \"" + sound + "\" , \"\", \"\", \"\", \"\", \"\", \"\", \"\"}"

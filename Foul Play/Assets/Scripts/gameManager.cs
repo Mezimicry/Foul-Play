@@ -32,6 +32,88 @@ public static class gameManager
 
 
     /// <summary>
+    /// Save data class
+    /// </summary>
+    public class saveData
+    {
+        public string saveName;
+        public int[] affinity;
+    }
+
+    public static saveData main_CurrentGameSave;
+
+
+
+    public static saveData getBlankSave()
+    {
+        saveData emptySave;
+        emptySave = new saveData();
+        emptySave.saveName = "No Save Name";
+        emptySave.affinity = new int[] {0,0,0,0,0,0,0,0,0,0};
+
+
+        return emptySave;
+    }
+
+
+    /// <summary>
+    /// Used when loading a save from the save slots
+    /// </summary>
+    /// <param name="wantedSave"></param>
+    public static void setSaveData(saveData wantedSave)
+    {
+        main_CurrentGameSave = wantedSave;
+    }
+
+    /// <summary>
+    /// Used when saving the game to the save slots
+    /// </summary>
+    /// <returns>The currently used save</returns>
+    public static saveData getSaveData()
+    {
+        return main_CurrentGameSave;
+    }
+
+
+    /// <summary>
+    /// Used when loading a save from the save slots
+    /// </summary>
+    /// <param name="wantedSave"></param>
+    public static void setSaveName(string wantedName)
+    {
+        main_CurrentGameSave.saveName = wantedName;
+    }
+
+    /// <summary>
+    /// Used when saving the game to the save slots
+    /// </summary>
+    /// <returns></returns>
+    public static string getSaveName()
+    {
+        return main_CurrentGameSave.saveName;
+    }
+
+    /// <summary>
+    /// Changes the affinity of the wanted character
+    /// </summary>
+    /// <param name="affinitySlot">The number for the character</param>
+    /// <param name="newAffinity">The new affinity</param>
+    public static void setAffinity(int affinitySlot, int newAffinity)
+    {
+        main_CurrentGameSave.affinity[affinitySlot] = newAffinity;
+    }
+
+    /// <summary>
+    /// Gets the affinity for the choosen character
+    /// </summary>
+    /// <returns></returns>
+    public static int getAffinity(int affinitySlot)
+    {
+        return main_CurrentGameSave.affinity[affinitySlot];
+    }
+
+
+    /// <summary>
     /// Stores what script the VN will open
     /// </summary>
     /// <param name="wantedScript"></param>
@@ -65,12 +147,17 @@ public static class gameManager
         return VN_exitCode;
     }
 
+    /// <summary>
+    /// Tells the point and click that it should check the exit code as it should have changed
+    /// </summary>
+    /// <param name="checkExitCode"></param>
     public static void setVN_checkExitCode(bool checkExitCode)
     {
         VN_checkExitCode = checkExitCode;
     }
+
     /// <summary>
-    /// Gets the current exit code so that other scenes can know what happened in the VN
+    /// Gets the current exit code and changes it to false
     /// </summary>
     public static bool getVN_checkExitCode()
     {
@@ -79,7 +166,10 @@ public static class gameManager
             VN_checkExitCode = false;
             return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
 
@@ -145,12 +235,20 @@ public static class gameManager
         Main_musicVolume = volume;
     }
     /// <summary>
-    /// Gets the current music volume
+    /// Gets the current music volume for sound use
     /// </summary>
     /// <returns>Current music volume divided by master volume</returns>
     public static float getMain_MusicVolume()
     {
         return (Main_musicVolume / 100) * (Main_masterVolume / 100);
+    }
+    /// <summary>
+    /// Gets the current music volume for saving
+    /// </summary>
+    /// <returns></returns>
+    public static float getMain_TrueMusicVolume()
+    {
+        return Main_musicVolume;
     }
 
     /// <summary>
@@ -168,5 +266,13 @@ public static class gameManager
     public static float getMain_SoundEffectVolume()
     {
         return (Main_soundEffectVolume / 100) * (Main_masterVolume / 100 );
+    }
+    /// <summary>
+    /// Gets the current sound effect volume for saving
+    /// </summary>
+    /// <returns></returns>
+    public static float getMain_TrueSoundEffectVolume()
+    {
+        return Main_soundEffectVolume;
     }
 }
