@@ -10,7 +10,7 @@ public class Main_MusicLibrary : MonoBehaviour
 
     // Each of these hold a different music track that should be played.
     public AudioClip titleScreenMusic;
-    public AudioClip VNTest;
+    public AudioClip song6InsideTheCastle;
 
     string currentlyPlayingMusic;
     string wantedMusic;
@@ -39,7 +39,7 @@ public class Main_MusicLibrary : MonoBehaviour
 
             // Finds the wanted music
             if (wantedMusic == "Title Screen") { audioSource.clip = titleScreenMusic; }
-            else if (wantedMusic == "Opening Music") { audioSource.clip = VNTest; }
+            else if (wantedMusic == "Inside The Castle") { audioSource.clip = song6InsideTheCastle; }
 
             // Then plays changes what one is playing
             audioSource.Play();

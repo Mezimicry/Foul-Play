@@ -36,11 +36,25 @@ public static class gameManager
     /// </summary>
     public class saveData
     {
-        public string saveName = "Empty";
+        public string saveName;
+        public int[] affinity;
     }
 
-
     public static saveData main_CurrentGameSave;
+
+
+
+    public static saveData getBlankSave()
+    {
+        saveData emptySave;
+        emptySave = new saveData();
+        emptySave.saveName = "No Save Name";
+        emptySave.affinity = new int[] {0,0,0,0,0,0,0,0,0,0};
+
+
+        return emptySave;
+    }
+
 
     /// <summary>
     /// Used when loading a save from the save slots
@@ -77,6 +91,25 @@ public static class gameManager
     public static string getSaveName()
     {
         return main_CurrentGameSave.saveName;
+    }
+
+    /// <summary>
+    /// Changes the affinity of the wanted character
+    /// </summary>
+    /// <param name="affinitySlot">The number for the character</param>
+    /// <param name="newAffinity">The new affinity</param>
+    public static void setAffinity(int affinitySlot, int newAffinity)
+    {
+        main_CurrentGameSave.affinity[affinitySlot] = newAffinity;
+    }
+
+    /// <summary>
+    /// Gets the affinity for the choosen character
+    /// </summary>
+    /// <returns></returns>
+    public static int getAffinity(int affinitySlot)
+    {
+        return main_CurrentGameSave.affinity[affinitySlot];
     }
 
 

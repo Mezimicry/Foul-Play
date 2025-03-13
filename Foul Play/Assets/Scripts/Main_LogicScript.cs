@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +18,7 @@ public class Main_LogicScript : MonoBehaviour
     public GameObject cutsceneScreen;
     public GameObject continueMenu;
     public GameObject skipCutsceneBox;
+    public GameObject saveMenu;
 
     // Used so the unpause button in the settings only shows up when the game is paused
     public GameObject settingsUnpauseButton;
@@ -32,12 +35,12 @@ public class Main_LogicScript : MonoBehaviour
 
 
     // Save Data
-    public Text currentSaveDebug;
-    public InputField changeSaveDataDebug;
-    public Dropdown currentSaveDropdownTemp;
-    int saveSlot;
-
     gameManager.saveData[] playerSaves;
+    public Text[] continueSlotNames;
+    public Text[] saveSlotNames;
+    public InputField saveNameInput;
+    string savePath;
+
 
     void Start()
     {
@@ -49,6 +52,10 @@ public class Main_LogicScript : MonoBehaviour
         musicVolumeSlider.value = gameManager.getMain_TrueMusicVolume();
         soundEffectVolumeSlider.value = gameManager.getMain_TrueSoundEffectVolume();
 
+        // Used to make sure theres a save loaded
+        gameManager.setSaveData(gameManager.getBlankSave());
+
+
 
         // Creates an array of the save data
         playerSaves = new gameManager.saveData[3];
@@ -56,9 +63,29 @@ public class Main_LogicScript : MonoBehaviour
         playerSaves[1] = new gameManager.saveData();
         playerSaves[2] = new gameManager.saveData();
 
-        playerSaves[0].saveName = "One";
-        playerSaves[1].saveName = "Two";
-        playerSaves[2].saveName = "Three";
+        // Gets path of save system or makes it if it doesn't exsite
+        savePath = Directory.CreateDirectory(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/Games/Yarn Spinner Studios/Foul Play/").ToString();
+
+
+
+
+        AssetDatabase.CreateFolder("Assets", "My Folder");
+
+
+
+        // Loads exsiting save data into these saves
+        for (int i = 0; i <= 2; i++)
+        {
+            if (File.Exists(savePath + "/SaveSlot" + i + ".json"))
+            {
+                playerSaves[i] = JsonUtility.FromJson<gameManager.saveData>(System.IO.File.ReadAllText(savePath + "/SaveSlot" + i + ".json"));
+            }
+            // If game is not saved then fills with default data
+            else
+            {
+                playerSaves[i] = gameManager.getBlankSave();
+            }
+        }
 
         // Sets current title music to the title screen music
         gameManager.setMain_wantedMusic("Title Screen");
@@ -79,10 +106,6 @@ public class Main_LogicScript : MonoBehaviour
         }
 
 
-        saveSlot = currentSaveDropdownTemp.value;
-
-        currentSaveDebug.text = playerSaves[saveSlot].saveName;
-        
 
         // Updates volume settings when settings menu is open
         if (settingsMenu.activeSelf)
@@ -97,17 +120,51 @@ public class Main_LogicScript : MonoBehaviour
             soundEffectVolumeShower.text = soundEffectVolumeSlider.value.ToString();
         }
 
+        if (saveMenu.activeSelf)
+        {
+            saveSlotNames[0].text = playerSaves[0].saveName;
+            saveSlotNames[1].text = playerSaves[1].saveName;
+            saveSlotNames[2].text = playerSaves[2].saveName;
+        }
+
+        if (continueMenu.activeSelf)
+        {
+            continueSlotNames[0].text = playerSaves[0].saveName;
+            continueSlotNames[1].text = playerSaves[1].saveName;
+            continueSlotNames[2].text = playerSaves[2].saveName;
+        }
 
 
-        
+
 
 
     }
 
-    public void saveData()
+
+    public void saveData(int saveSlot)
     {
-        playerSaves[saveSlot].saveName = changeSaveDataDebug.text;
+        gameManager.setSaveName(saveNameInput.text);
+
+
+        playerSaves[saveSlot] = gameManager.getSaveData();
+
+        System.IO.File.WriteAllText(savePath + "/SaveSlot" + saveSlot+".json", JsonUtility.ToJson(playerSaves[saveSlot]));
+
+        // For some reason after saving to a slot it would keep changing that slot in future saves. So now it replaces each slot with the saved slot each time.
+        for (int i = 0; i <= 2; i++)
+        {
+            if (File.Exists(savePath + "/SaveSlot" + i + ".json"))
+            {
+                playerSaves[i] = JsonUtility.FromJson<gameManager.saveData>(System.IO.File.ReadAllText(savePath + "/SaveSlot" + i + ".json"));
+            }
+            // If game is not saved then fills with default data
+            else
+            {
+                playerSaves[i] = gameManager.getBlankSave();
+            }
+        }
     }
+
 
 
 
@@ -123,7 +180,7 @@ public class Main_LogicScript : MonoBehaviour
         gameManager.setVN_Script(scriptDropdown.options[scriptDropdown.value].text);
 
         // Sets the music
-        gameManager.setMain_wantedMusic("Opening Music");
+        gameManager.setMain_wantedMusic("Inside The Castle");
 
         // Loads the scene
         SceneManager.LoadScene("Visual Novel", LoadSceneMode.Additive);
@@ -145,7 +202,7 @@ public class Main_LogicScript : MonoBehaviour
     /// <summary>
     /// Used to continue a saved game then starts the game
     /// </summary>
-    public void continueGame()
+    public void continueGame(int saveSlot)
     {
         gameManager.setSaveData(playerSaves[saveSlot]);
         startGame();
@@ -189,6 +246,11 @@ public class Main_LogicScript : MonoBehaviour
             if (settingsMenu.activeSelf)
             {
                 toggleSettings();
+            }
+
+            if (saveMenu.activeSelf)
+            {
+                toggleSaveMenu();
             }
         }
         // If the menu is now open it allows the Unpause buttons to be in the settings menu
@@ -236,7 +298,11 @@ public class Main_LogicScript : MonoBehaviour
         }
     }
 
-
+    public void toggleSaveMenu()
+    {
+        saveNameInput.text = gameManager.getSaveName();
+        saveMenu.SetActive(!saveMenu.activeSelf);
+    }
 
     public void toggleContinue()
     {

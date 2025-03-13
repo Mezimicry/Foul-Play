@@ -215,6 +215,11 @@ public class VN_LogicScript : MonoBehaviour
                 sound(script[scriptIndex , 1]);
             }
 
+            else if (script[scriptIndex, 0] == "Affinity")
+            {
+                affinity(wantedCharacter, int.Parse(script[scriptIndex, 2]));
+            }
+
             else
             {
                 error(true);
@@ -276,6 +281,19 @@ public class VN_LogicScript : MonoBehaviour
         audioSource.Play();
         arrayTargetTextBoxIndex += 1;
     }
+
+
+    /// <summary>
+    /// Changes the charater's affinity. Need to add visual
+    /// </summary>
+    /// <param name="Character"></param>
+    /// <param name="value"></param>
+    void affinity(int Character, int value)
+    {
+        gameManager.setAffinity(Character, gameManager.getAffinity(Character) + value);
+        scriptIndex += 1;
+    }
+
 
 
 
