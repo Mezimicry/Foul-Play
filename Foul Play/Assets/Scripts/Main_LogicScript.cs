@@ -66,13 +66,6 @@ public class Main_LogicScript : MonoBehaviour
         // Gets path of save system or makes it if it doesn't exsite
         savePath = Directory.CreateDirectory(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/Games/Yarn Spinner Studios/Foul Play/").ToString();
 
-
-
-
-        AssetDatabase.CreateFolder("Assets", "My Folder");
-
-
-
         // Loads exsiting save data into these saves
         for (int i = 0; i <= 2; i++)
         {
