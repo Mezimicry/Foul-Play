@@ -41,7 +41,7 @@ public class VN_Scripts : MonoBehaviour
             {"Say", "Ebony", "Hello Foul This is a Text Box" , ""  , "", "", "", "", ""  },
             {"Move", "Ebony", "5", "3"  , "", "", "", "", "" },
             {"Move", "Fake Foul", "-5", "5"  , "", "", "", "", "" },
-            {"Say", "Foul", "I am the villian of the game and by passing you I have now kidnapped you." , ""  , "" , "", "", "", "" },
+            {"Say", "Foul", "I am the <color=red>villian</color> <color=red>of</color> <color=red>the</color> <color=red>game</color> and by passing you I have now kidnapped you." , ""  , "" , "", "", "", "" },
             {"Sound", "KianeYay"  , ""  , "" , "", "", "", "", "" },
             {"Say", "Ebony", "Oh no. Please don't take me and dye my hair." , ""  , "", "", "", "", "" },
             {"Change", "Ebony", "1"  , ""  , "", "", "", "", "" },
