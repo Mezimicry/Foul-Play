@@ -44,19 +44,23 @@ public class VN_LogicScript : MonoBehaviour
     // Variables used for Choice
     // Hold the canvas the choiceUI is in.
     public GameObject choiceUI;
+    public GameObject twoChoiceUI;
 
     // Holds the text boxes used in the buttons
     public Text sweetChoiceText;
     public Text sadisticChoiceText;
     public Text sassyChoiceText;
     public Text strongChoiceText;
+    public Text yesChoiceText;
+    public Text noChoiceText;
 
     // Holds the point that each of the buttons should send the player too
     string sweetChoicePoint;
     string sadisticChoicePoint;
     string sassyChoicePoint;
     string strongChoicePoint;
-    
+
+
 
 
 
@@ -188,6 +192,11 @@ public class VN_LogicScript : MonoBehaviour
             else if (script[scriptIndex , 0] == "Choice")
             {
                 choice(script[scriptIndex , 1], script[scriptIndex , 2], script[scriptIndex , 3], script[scriptIndex , 4], script[scriptIndex, 5], script[scriptIndex, 6], script[scriptIndex, 7], script[scriptIndex, 8]);
+            }
+
+            else if (script[scriptIndex, 0] == "2Choice")
+            {
+                twoChoice(script[scriptIndex, 1], script[scriptIndex, 2], script[scriptIndex, 3], script[scriptIndex, 4]);
             }
 
             else if (script[scriptIndex , 0] == "Disappear")
@@ -381,6 +390,18 @@ public class VN_LogicScript : MonoBehaviour
         continueScript = false;
     }
 
+    void twoChoice(string option1, string option1Point, string option2, string option2Point)
+    {
+        twoChoiceUI.SetActive(true);
+        yesChoiceText.text = option1;
+        noChoiceText.text = option2;
+
+        sweetChoicePoint = option1Point;
+        sadisticChoicePoint = option2Point;
+
+        continueScript = false;
+    }
+
 
 
     /// <summary>
@@ -393,6 +414,7 @@ public class VN_LogicScript : MonoBehaviour
         continueScript = true;
         
         choiceUI.SetActive(false);
+        twoChoiceUI.SetActive(false);
 
         if (choiceNum == 1)
         {

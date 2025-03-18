@@ -76,11 +76,12 @@ while (continueMaking):
     print("4. Branch Point")
     print("5. Change")
     print("6. Choice")
-    print("7. Disappear")
-    print("8. End")
-    print("9. Move")
-    print("10. Say")
-    print("11. Sound")
+    print("7. 2Choice")
+    print("8. Disappear")
+    print("9. End")
+    print("10. Move")
+    print("11. Say")
+    print("12. Sound")
     print("101. Delete Prev Commands")
     print("999. End Program")
     wantedInstruction = int(input())
@@ -140,19 +141,28 @@ while (continueMaking):
         wantedIndex4 = input("Choose branch point for strong choice to branch to: ")
         newScriptLine = "{\"Choice\", \"" + choiceText1 + "\" , \"" + wantedIndex + "\", \"" + choiceText2 + "\", \"" + wantedIndex2 + "\", \"" + choiceText3 + "\" , \"" + wantedIndex3 + "\", \"" + choiceText4 + "\", \"" + wantedIndex4 + "\"}"
         script.append(newScriptLine)
-
+        
     elif (wantedInstruction == 7):
+        print("Choice")
+        choiceText1 = input("Choose first choice text: ")
+        wantedIndex = input("Choose branch point for first choice to branch to: ")
+        choiceText2 = input("Choose second choice text: ")
+        wantedIndex2 = input("Choose branch point for second choice to branch to: ")
+        newScriptLine = "{\"2Choice\", \"" + choiceText1 + "\" , \"" + wantedIndex + "\", \"" + choiceText2 + "\", \"" + wantedIndex2 + "\", \"\", \"\", \"\", \"\"}"
+        script.append(newScriptLine)
+
+    elif (wantedInstruction == 8):
         print("Disappear")
         character = findCharacter()
         newScriptLine = "{\"Disappear\", \"" + character + "\" , \"\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 8):
+    elif (wantedInstruction == 9):
         exitCode = input("Choose exit code: ")
         newScriptLine = "{\"End\", \"" + exitCode + "\" , \"\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 9):
+    elif (wantedInstruction == 10):
         print("Move")
         character = findCharacter()
         location = input("Choose location: ")
@@ -160,14 +170,14 @@ while (continueMaking):
         newScriptLine = "{\"Move\", \"" + character + "\" , \"" + location + "\", \"" + speed + "\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 10):
+    elif (wantedInstruction == 11):
         print("Say")
         name = input("Choose name: ")
         dialogue = input("Write dialogue: ")
         newScriptLine = "{\"Say\", \"" + name + "\" , \"" + dialogue + "\", \"\", \"\", \"\", \"\", \"\", \"\"}"
         script.append(newScriptLine)
 
-    elif (wantedInstruction == 11):
+    elif (wantedInstruction == 12):
         print("Sound")
         sound = input("Choose sound: ")
         newScriptLine = "{\"Sound\", \"" + sound + "\" , \"\", \"\", \"\", \"\", \"\", \"\", \"\"}"

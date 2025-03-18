@@ -4,44 +4,6 @@ using UnityEngine;
 
 public class VN_Scripts : MonoBehaviour
 {
-    // Templates with explainations
-
-    // {"Appear", "Name", "Location" , "", "", "", "", "", ""},
-    // Moves the character instantly
-
-    // {"Branch", "PointName" , "", "", "", "", "", "", ""},
-    // Changes location in the script
-
-    // {"Branch Point", "PointName" , "", "", "", "", "", "", ""},
-    // Saves a name for a location to branch to
-
-    // {"Change", "Name" , "SpriteNum" , "", "", "", "", "", ""},
-    // Changes the diresired character's sprite
-
-    // {"Choice", "SweetText", "SweetIndex", "SadisticText", "SadisticIndex", "SassyText", "SassyIndex", "StrongText", "StrongIndex"},
-    // Gives the player 2 options that will send them to different parts of the script
-
-    // {"Disappear", "Name" , "", "", "", "", "", "", ""},
-    // Sends character back to origin
-
-    // {"End", "End Code" , "", "", "", "", "", "", ""},
-    // Ends the VN segement
-    // Will also pass the end code so the game knows how you did in the VN
-
-    // {"Move", "Name" , "Location" , "Speed" , "", "", "", "", ""},
-    // Moves the character over time
-
-    // {"Say", "Name", "Text" , "", "", "", "", "", ""},
-    // Show dialogue
-    /* Max size for say is assumed to be the same as
-    Lorem ipsum odor amet, consectetuer adipiscing elit. Vulputate iaculis pellentesque efficitur et quam primis neque? Metus duis pellentesque congue sed blandit tempor aptent ac bibendum. Lobortis duis fames pretium mi fermentum. 
-    If a line is longer than this then split it.
-    */
-
-    // {"Sound", "SoundName" , "", "", "", "", "", "", ""},
-    // Play sound effects
-
-
     // Plain templates
 
     // {"Affinity", "Character" , "Direction", "Amount", "", "", "", "", ""},
@@ -50,6 +12,7 @@ public class VN_Scripts : MonoBehaviour
     // {"Branch Point", "PointName" , "", "", "", "", "", "", ""},
     // {"Change", "Name" , "SpriteNum" , "", "", "", "", "", ""},
     // {"Choice", "SweetText", "SweetIndex", "SadisticText", "SadisticIndex", "SassyText", "SassyIndex", "StrongText", "StrongIndex"},
+    // {"2Choice", "FirstText", "FirstIndex", "SecondText", "SecondIndex", "", "", "", ""},
     // {"Disappear", "Name" , "", "", "", "", "", "", ""},
     // {"End", "End Code" , "", "", "", "", "", "", ""},
     // {"Move", "Name" , "Location" , "Speed" , "", "", "", "", ""},
