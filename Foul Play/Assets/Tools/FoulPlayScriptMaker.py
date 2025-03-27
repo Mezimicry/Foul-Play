@@ -17,14 +17,12 @@ def findCharacter():
     print("2. King Kavi")
     print("3. Fake Foul")
     print("4. Foul")
-    print("5. Chimera")
-    print("6. Ushabti")
-    print("7. Wendigo")
-    print("8. Alerion")
-    print("9. Basil")
-    print("10. Hydra")
-    print("11. Tsuchigumo")
-    print("12. Vetala")
+    print("5. Clayton")
+    print("6. Basil")
+    print("7. Hydra")
+    print("8. Ögumo")
+    print("9. Fake Foul's Guard")
+
     
     characterNum = int(input())
 
@@ -39,21 +37,15 @@ def findCharacter():
     elif (characterNum == 4):
         return "Foul"
     elif (characterNum == 5):
-        return "Chimera"
+        return "Clayton"
     elif (characterNum == 6):
-        return "Ushabti"
-    elif (characterNum == 7):
-        return "Wendigo"
-    elif (characterNum == 8):
-        return "Alerion"
-    elif (characterNum == 9):
         return "Basil"
-    elif (characterNum == 10):
+    elif (characterNum == 7):
         return "Hydra"
-    elif (characterNum == 11):
-        return "Tsuchigumo"
-    elif (characterNum == 12):
-        return "Vetala"
+    elif (characterNum == 8):
+        return "Ögumo"
+    elif (characterNum == 9):
+        return "Fake Foul's Guard"
 
 
 

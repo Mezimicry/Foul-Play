@@ -2131,7 +2131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleScreenMusic: {fileID: 8300000, guid: 695797a38017fee47be13e41854bd515, type: 3}
-  song6InsideTheCastle: {fileID: 0}
+  song6InsideTheCastle: {fileID: 8300000, guid: 87f65733c8b1bc1498313e9e0dc39037, type: 3}
 --- !u!114 &599242965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8517,10 +8517,10 @@ RectTransform:
   - {fileID: 1711946866}
   m_Father: {fileID: 714573869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.05830335, y: 0.41000003}
-  m_AnchorMax: {x: 0.48769668, y: 0.60125554}
-  m_AnchoredPosition: {x: 2.6072693, y: -1.0837612}
-  m_SizeDelta: {x: 0.15171814, y: 1.0243378}
+  m_AnchorMin: {x: 0.05830335, y: 0.39649636}
+  m_AnchorMax: {x: 0.7101799, y: 0.60125554}
+  m_AnchoredPosition: {x: 1.5789948, y: -0.083761215}
+  m_SizeDelta: {x: -1.9039993, y: -0.9756999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2008577759
 MonoBehaviour:
@@ -8574,6 +8574,34 @@ MonoBehaviour:
     - m_Text: Test
       m_Image: {fileID: 0}
     - m_Text: Error
+      m_Image: {fileID: 0}
+    - m_Text: Clayton Meeting
+      m_Image: {fileID: 0}
+    - m_Text: Ungrateful Clayton
+      m_Image: {fileID: 0}
+    - m_Text: Grateful Clayton
+      m_Image: {fileID: 0}
+    - m_Text: Basil Original Offer
+      m_Image: {fileID: 0}
+    - m_Text: Basil Repeated Offer
+      m_Image: {fileID: 0}
+    - m_Text: Basil Offer Accepted
+      m_Image: {fileID: 0}
+    - m_Text: Turn In Right
+      m_Image: {fileID: 0}
+    - m_Text: Turn In Wrong
+      m_Image: {fileID: 0}
+    - m_Text: Basil Repeat 1
+      m_Image: {fileID: 0}
+    - m_Text: Basil Repeat 2
+      m_Image: {fileID: 0}
+    - m_Text: Basil Repeat 3
+      m_Image: {fileID: 0}
+    - m_Text: Basil Repeat 4
+      m_Image: {fileID: 0}
+    - m_Text: Basil Repeat 5
+      m_Image: {fileID: 0}
+    - m_Text: Basil Repeat 6
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9183,7 +9211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2126587690

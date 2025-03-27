@@ -11,6 +11,7 @@ using static UnityEngine.ParticleSystem;
 using static UnityEngine.Rendering.DebugUI;
 using Unity.VisualScripting;
 
+
 public class VN_LogicScript : MonoBehaviour
 {
     // Variables used for Say
@@ -105,7 +106,6 @@ public class VN_LogicScript : MonoBehaviour
         script = GetComponent<VN_Scripts>().returnScript(gameManager.getVN_Script());
         branchPoints = new string[script.GetLength(0)];
 
-        // Gets the audioSource to use later
         // Gets the audioSource to use later
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = gameManager.getMain_SoundEffectVolume();
@@ -229,6 +229,11 @@ public class VN_LogicScript : MonoBehaviour
                 affinity(wantedCharacter, int.Parse(script[scriptIndex, 2]));
             }
 
+            else if (script[scriptIndex, 0] == "New Script")
+            {
+                loadScript(script[scriptIndex, 1]);
+            }
+
             else
             {
                 error(true);
@@ -273,6 +278,21 @@ public class VN_LogicScript : MonoBehaviour
             audioSource.volume = gameManager.getMain_SoundEffectVolume();
         }
 
+    }
+
+    private void loadScript(string newScript)
+    {
+        // Reset values
+        scriptIndex = 0;
+        playerInput = false;
+        allowContinue = true;
+        continueScript = true;
+
+
+
+
+        script = GetComponent<VN_Scripts>().returnScript(newScript);
+        branchPoints = new string[script.GetLength(0)];
     }
 
 

@@ -1,8 +1,12 @@
-if (scriptName == "Bleh")
+if (scriptName == "Basil Repeat x")
 {
 string[,] script =
 {
-            {"2Choice", "Cool Bean" , "Stuf", "KeepThe BEam Cool", "AAAA", "", "", "", ""}
+            {"Appear", "Ebony" , "-5", "", "", "", "", "", ""}, 
+            {"Appear", "Basil" , "5", "", "", "", "", "", ""}, 
+            {"Say", "Ebony" , "Is the sandwich done yet?", "", "", "", "", "", ""}, 
+            {"Say", "Basil" , "Words", "", "", "", "", "", ""}, 
+            {"End", "Wasting Basil's Time" , "", "", "", "", "", "", ""}
             };
 return script;
 }
