@@ -46,6 +46,9 @@ def findCharacter():
         return "Ögumo"
     elif (characterNum == 9):
         return "Fake Foul's Guard"
+    else:
+        return "BG"
+     
 
 
 
