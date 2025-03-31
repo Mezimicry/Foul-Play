@@ -3319,6 +3319,9 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: cc2e5a8e178041343add52c858760f84, type: 3}
   - {fileID: 21300000, guid: 1d92382f692803c459dff34bd16dce67, type: 3}
+  - {fileID: 21300000, guid: 4a5bb8c1e3be3524e9bc1dec085c72e3, type: 3}
+  - {fileID: 21300000, guid: 3a3392693e5b9f0449c8a15807161414, type: 3}
+  - {fileID: 21300000, guid: b8f7f4d713c28344599ff66176494ece, type: 3}
 --- !u!212 &1054329888
 SpriteRenderer:
   m_ObjectHideFlags: 0
