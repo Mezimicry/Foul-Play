@@ -394,7 +394,7 @@ public class VN_Scripts : MonoBehaviour
             {"Say", "Ogumo" , "Finally, a good question. I was living as a thief in Japan for many years, but when an angry mob came for me, it was Foul who saved my life. Me and him have been scheming and plotting ever since.", "", "", "", "", "", ""},
             {"Say", "Ebony" , "So you're only working with him because you feel indebted to him?", "", "", "", "", "", ""},
             {"Say", "Ogumo" , "Well, maybe it was like that at first, but then I actually realised we see eye-to-eye on a lot of things. We have a lot in common too, so it made a lot of sense to have me his right-hand man.", "", "", "", "", "", ""},
-            {"Say", "Ebony" , "I can't lie, this all sounds just a little gay if you ask me... nothing wrong with that of course, just an observation on my part.", "", "", "", "", "", ""},
+            {"Say", "Ebony" , "I can't lie, this all sounds just a little gay if you ask me... nothing wrong with that of course, just an observation on my part.", "OMG she also ships Foulgumo", "", "", "", "", ""},
             {"Say", "Ogumo" , "You- what?! Me and- No! Never I- What?!", "", "", "", "", "", ""},
             {"Say", "Ebony" , "Easy now, Ogumo I was only kidding. Though you did get a little flustered there. Something you want to get off your chest?", "", "", "", "", "", ""},
             {"Say", "Ogumo" , "Alright I think that's enough chatting for today. Isn't there somewhere you need to be?", "", "", "", "", "", ""},
