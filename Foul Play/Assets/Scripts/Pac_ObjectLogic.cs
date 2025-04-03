@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pac_ObjectLogic : MonoBehaviour
@@ -13,14 +14,16 @@ public class Pac_ObjectLogic : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
+    GameObject personalQuestionMark;
 
-
+    public GameObject LogicScript;
+    public string characterName;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
-        Instantiate(questionMark, new Vector3(transform.position.x, (transform.position.y + 3), transform.position.z), transform.rotation);
+        personalQuestionMark = Instantiate(questionMark, new Vector3(transform.position.x, (transform.position.y + 3), -2.5f), transform.rotation);
 
     }
 
@@ -33,16 +36,23 @@ public class Pac_ObjectLogic : MonoBehaviour
             {
                 if (distance < interactionRange)
                 {
-                    HighlightObject(true);
+                    personalQuestionMark.SetActive(true);
+                    //HighlightObject(true);
                 }
 
                 else
                 {
-                    HighlightObject(false);
+                    personalQuestionMark.SetActive(false);
+                    //HighlightObject(false);
                 }
-
             }
         }
+
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Space) & (AdjustedDistance(player.position, transform.position) < interactionRange))
+        {
+            LogicScript.GetComponent<PaC_LogicScript>().characterInteracted(characterName);
+        }
+
     }
 
     void LateUpdate()

@@ -38,6 +38,8 @@ public static class gameManager
     {
         public string saveName;
         public int[] affinity;
+
+        public string basilIngredientsCollected;
     }
 
     public static saveData main_CurrentGameSave;
@@ -50,6 +52,11 @@ public static class gameManager
         emptySave = new saveData();
         emptySave.saveName = "No Save Name";
         emptySave.affinity = new int[] {0,0,0,0,0,0,0,0,0,0};
+
+
+
+
+
 
 
         return emptySave;
@@ -110,6 +117,20 @@ public static class gameManager
     public static int getAffinity(int affinitySlot)
     {
         return main_CurrentGameSave.affinity[affinitySlot];
+    }
+
+    public static void setBasilIngredientCollected(string ingredientType)
+    {
+        main_CurrentGameSave.basilIngredientsCollected = ingredientType;
+    }
+
+    /// <summary>
+    /// Gets the affinity for the choosen character
+    /// </summary>
+    /// <returns></returns>
+    public static string getBasilIngredientCollected()
+    {
+        return main_CurrentGameSave.basilIngredientsCollected;
     }
 
 

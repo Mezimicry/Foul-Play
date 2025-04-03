@@ -12,7 +12,8 @@ public class VN_CharacterScript : MonoBehaviour
     float directionMod;
     // If the code for moving needs to run
     bool needToMove = false;
-
+    // Changes the y ofset if required
+    public float yOffset = 2;
 
     // Array that holds all of the character's sprites
     public Sprite[] sprites;
@@ -24,7 +25,7 @@ public class VN_CharacterScript : MonoBehaviour
     void Start()
     {
         // Stores origin of the character so it can return
-        origin = new Vector2(transform.position.x, transform.position.y);
+        origin = new Vector3(transform.position.x, transform.position.y, -4);
     }
 
 
@@ -53,7 +54,7 @@ public class VN_CharacterScript : MonoBehaviour
     {
         targetSpeed = 0;
         needToMove = false;
-        transform.localPosition = new Vector2(xAxis, 0);
+        transform.localPosition = new Vector3(xAxis, yOffset, -4);
     }
 
 

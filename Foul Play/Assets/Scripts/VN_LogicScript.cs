@@ -293,6 +293,16 @@ public class VN_LogicScript : MonoBehaviour
 
         script = GetComponent<VN_Scripts>().returnScript(newScript);
         branchPoints = new string[script.GetLength(0)];
+
+        // Checks the script for any branch points and then stores them
+        for (int i = 0; i < (script.GetLength(0) - 1); i++)
+        {
+            if (script[i, 0] == "Branch Point")
+            {
+                branchPoints[i] = script[i, 1];
+            }
+
+        }
     }
 
 

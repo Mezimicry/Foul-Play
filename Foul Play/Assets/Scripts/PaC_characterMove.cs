@@ -11,6 +11,7 @@ public class PaC_characterMove : MonoBehaviour
     private BoxCollider2D bc;
     private bool isMoving = false;
 
+
     void Start()
     {
         //gets the boxcollider and the rigidbody
@@ -63,6 +64,11 @@ public class PaC_characterMove : MonoBehaviour
 
         isMoving = true;
     }
+
+
+
+
+
 
     void MoveToTarget()
     {
