@@ -1,12 +1,47 @@
-if (scriptName == "Basil Repeat x")
+if (scriptName == "Hydra Meeting")
 {
 string[,] script =
 {
             {"Appear", "Ebony" , "-5", "", "", "", "", "", ""}, 
-            {"Appear", "Basil" , "5", "", "", "", "", "", ""}, 
-            {"Say", "Ebony" , "Is the sandwich done yet?", "", "", "", "", "", ""}, 
-            {"Say", "Basil" , "Words", "", "", "", "", "", ""}, 
-            {"End", "Wasting Basil's Time" , "", "", "", "", "", "", ""}
+            {"Appear", "Hydra" , "5", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "Hiiii! We've like, totally got  a bunch of riddles for you to try and guess!", "", "", "", "", "", ""}, 
+            {"Say", "April" , "Riddles are kinda like, our thing. So you'd better like them. Or don't. Whatever.", "", "", "", "", "", ""}, 
+            {"Say", "Irys" , "Who cares if she likes our riddles? We aren't getting out of this tank anyway...", "", "", "", "", "", ""}, 
+            {"Say", "Jeremy" , "Wait I'm sorry what? Were we talking to someone I wasn't paying attention.", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "So like, we're each gonna tell you something, but only one of us is telling the truth. So you've gotta like, guess who's lying and who's telling the truth, ok?", "", "", "", "", "", ""}, 
+            {"Say", "Ebony" , "Do I have to do this?", "", "", "", "", "", ""}, 
+            {"Say", "April" , "Yes.", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "Oooh ok ok I'll start! Emperor Foul has tough skin, so insults won't affect him much.", "", "", "", "", "", ""}, 
+            {"Say", "April" , "This castle is haunted by evil spirits, and one of them is possessing someone here. (awesome, right?)", "", "", "", "", "", ""}, 
+            {"Say", "Irys" , "Some say that Ogumo and Foul are actually the same person.", "", "", "", "", "", ""}, 
+            {"Say", "Jeremy" , "Hm? Oh, um... oh that's right uh... Clayton will give you hints if you give him whatever object he's dreaming about.", "", "", "", "", "", ""}, 
+            {"Say", "WOLFESCHLEGELSTEINHAUSENBERGERDORFF " , "...", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "...Wolfe", "", "", "", "", "", ""}, 
+            {"Say", "WOLFESCHLEGELSTEINHAUSENBERGERDORFF" , "...I'm sorry guys.", "", "", "", "", "", ""}, 
+            {"Say", "Irys" , "You've gotta be kidding me...", "", "", "", "", "", ""}, 
+            {"Say", "April" , "Oh my FUCKING god.", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "After all the times we've rehearsed? You seriously forgot your fucking riddle?", "", "", "", "", "", ""}, 
+            {"Say", "WOLFESCHLEGELSTEINHAUSENBERGERDORFF" , "Look guys it just doesn't feel right to lie about Emperor Foul like this! He took us in and we should be thankful, right?", "", "", "", "", "", ""}, 
+            {"Say", "Jeremy" , "He kidnapped us from our home, Wolfe! That is not something to be thankful about!", "", "", "", "", "", ""}, 
+            {"Say", "WOLFESCHLEGELSTEINHAUSENBERGERDORFF" , "But guys...", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "Shut up, everybody shut up we're losing her! Hiiii Ebony sorry about that. Which do you think is the correct answer?", "", "", "", "", "", ""}, 
+            {"Choice", "Foul has thick skin." , "Wrong", "The castle is haunted.", "Wrong", "Ogumo and Foul are the same person." , "Wrong", "Clayton will give you hints.", "Right"}, 
+            {"Branch Point", "Wrong" , "", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "Ooh... sorry, darling! That's the wrong answer!", "", "", "", "", "", ""}, 
+            {"Say", "WOLFESCHLEGELSTEINHAUSENBERGERDORFF" , "Haha! Emperor Foul's secrets are secure for another day.", "", "", "", "", "", ""}, 
+            {"Branch", "Ending" , "", "", "", "", "", "", ""}, 
+            {"Branch Point", "Right" , "", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "Yay! Well done! That was the right answer! Now you can use that knowledge to help you on your quest.", "", "", "", "", "", ""}, 
+            {"Say", "WOLFESCHLEGELSTEINHAUSENBERGERDORFF" , "I'm still not sure how I feel about all this, guys. We shouldn't be giving out information like this to Ebony. It might hurt our boss's chances of getting married! ", "", "", "", "", "", ""}, 
+            {"Branch", "Ending" , "", "", "", "", "", "", ""}, 
+            {"Branch Point", "Ending" , "", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "Oh my god. Could you just shut up about Foul for like, one second?", "", "", "", "", "", ""}, 
+            {"Say", "WOLFESCHLEGELSTEINHAUSENBERGERDORFF" , "That's EMPEROR Foul to you, actually.", "", "", "", "", "", ""}, 
+            {"Say", "Jeremy" , "Oh my god.", "", "", "", "", "", ""}, 
+            {"Say", "April" , "We're doomed...", "", "", "", "", "", ""}, 
+            {"Say", "Irys" , "I literally hate you all.", "", "", "", "", "", ""}, 
+            {"Say", "Chloe" , "Ok! Uhh thank you for coming Ebony please come back tomorrow for a new riddle (Irys! Stop biting me!) and yeah. You may want to leave before this like, gets super ugly.", "", "", "", "", "", ""}, 
+            {"End", "Riddle Me This" , "", "", "", "", "", "", ""}
             };
 return script;
 }

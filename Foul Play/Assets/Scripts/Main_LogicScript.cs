@@ -337,6 +337,7 @@ public class Main_LogicScript : MonoBehaviour
         // Changes the music after the opening cutscene to the opening music
         if (endedCutscene == "Opening Cutscene")
         {
+            gameManager.setMain_wantedMusic("Inside The Castle");
             startGame();
         }
     }
